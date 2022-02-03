@@ -1,20 +1,24 @@
-using System;
 using UnityEngine;
 
 namespace Settings
 { 
-    [Serializable]
-    public class SpawnerSettings
+    [CreateAssetMenu(fileName = "Spawner", menuName = "Spawner Settings", order = 0)]
+    public class SpawnerSettings: ScriptableObject
     {
-        [SerializeField] private int priority;
-        [SerializeField] private Vector3 position;
-        [SerializeField] private Quaternion rotation;
-        [SerializeField] private Vector3 scale;
+        [SerializeField] private float spawnPercent;
+        [SerializeField] private Vector2 minPoint;
+        [SerializeField] private Vector2 maxPoint;
+        [SerializeField] private float angleMinPoint;
+        [SerializeField] private float forceMinPoint;
+        [SerializeField] private float angleMaxPoint;
+        [SerializeField] private float forceMaxPoint;
 
-
-        public int Priority => priority;
-        public Vector3 Position => position;
-        public Quaternion Rotation => rotation;
-        public Vector3 Scale => scale;
+        public float SpawnPercent => spawnPercent;
+        public Vector2 MinPoint => minPoint;
+        public Vector2 MaxPoint => maxPoint;
+        public float AngleMinPoint => angleMinPoint;
+        public float ForceMinPoint => forceMinPoint;
+        public float AngleMaxPoint => angleMaxPoint;
+        public float ForceMaxPoint => forceMaxPoint;
     }
 }
