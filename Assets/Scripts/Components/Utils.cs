@@ -6,26 +6,20 @@ namespace Components
 {
     public static class Utils
     {
-        public static Vector2 CurrentDisplay()
+        public static Vector3 ScreenToWorldPoint(Vector2 point, Camera screen)
         {
-            return new Vector2(Screen.width ,Screen.height);
+            return screen.ScreenToWorldPoint(point * new Vector2(Screen.width, Screen.height));
         }
         
-        public static Vector3 GetVelocity(float angle, float force)
-        {
-            // TODO: get velocity by angle and force
-            return new Vector3();
-        }
-
         public static Vector3 MiddleBetweenVector3(Vector3 pointA, Vector3 pointB)
         {
             return pointB - (pointB - pointA) * 0.5f;
         }
 
-        public static Vector3 RandomRangeVector3(Vector3 minInclusive, Vector3 maxInclusive)
+        public static Vector2 RandomRangeVector2(Vector2 minInclusive, Vector2 maxInclusive)
         {
             // TODO: Random.Range for Vector3 values
-            return new Vector3();
+            return new Vector2();
         }
         
         public static int RandomRangeWeight(IReadOnlyList<float> probes)
