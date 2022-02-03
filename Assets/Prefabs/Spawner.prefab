@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a227d68597c9418dbc840e987bc096fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  unitPrefab: {fileID: 9062388785874895598, guid: 7caacd23f1d96a94e83dc0b79162681d, type: 3}
