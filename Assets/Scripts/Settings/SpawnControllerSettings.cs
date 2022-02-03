@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,10 +7,11 @@ namespace Settings
     public class SpawnControllerSettings : ScriptableObject
     {
         [SerializeField] private int spawnInterval;
-        [SerializeField] private SpawnerSettings[] spawnersSettings;
+        [Space]
+        [SerializeField] private SpawnZone[] spawners;
 
         public int SpawnInterval => spawnInterval;
-        public IEnumerable<SpawnerSettings> SpawnersSettings => spawnersSettings;
-        public float[] Probes => spawnersSettings.Select(spawnerSettings => spawnerSettings.SpawnPercent/100).ToArray();
+        public SpawnZone[] Spawners => spawners;
+        public float[] Probes => spawners.Select(spawnerSettings => spawnerSettings.SpawnPercent/100).ToArray();
     }
 }
