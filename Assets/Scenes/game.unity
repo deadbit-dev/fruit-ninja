@@ -391,7 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 60cd6fc9da08d534a916ddd3712031a3, type: 2}
-  spawnerPrefab: {fileID: 5615784285544554753, guid: 8c6ecfcfe04fd8a43bae02bf181d7564, type: 3}
+  unitPrefab: {fileID: 9062388785874895598, guid: 7caacd23f1d96a94e83dc0b79162681d, type: 3}
+  screen: {fileID: 519420031}
 --- !u!1 &1865320829
 GameObject:
   m_ObjectHideFlags: 0
