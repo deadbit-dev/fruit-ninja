@@ -6,8 +6,8 @@ namespace Components
     public class SpawnController : MonoBehaviour
     {
         [SerializeField] private SpawnControllerSettings settings;
+        [SerializeField] private GameField gameField;
         [SerializeField] private PhysicsUnit unitPrefab;
-        [SerializeField] private Camera screen;
         
         private float _spawnInterval;
         
@@ -29,23 +29,16 @@ namespace Components
 
         private void Spawn()
         {
-            var spawner = settings.Spawners[Utils.RandomRangeWeight(settings.Probes)];
-           
-            var position = Utils.ScreenToWorldPoint(
-                Utils.RandomRangeVector2(spawner.MinPoint, spawner.MaxPoint),
-                screen);
-                        
-            // TODO: get weightVelocity by point between points
-            const float weightVelocity = 0.5f;
-                        
-            var velocity = Vector3.Lerp(
-                Physics.GetVelocity(spawner.AngleMinPoint, spawner.ForceMinPoint), 
-                Physics.GetVelocity(spawner.AngleMaxPoint, spawner.ForceMaxPoint), 
-                weightVelocity);
+            var spawnZone = settings.SpawnZones[Utils.RandomRangeWeight(settings.Priorities)];
 
-            Instantiate(unitPrefab, position, Quaternion.identity).Velocity = velocity;
+            var weight = Random.value;
+
+            var position = gameField.UnitPointToGameFieldSpace(
+                Vector3.Lerp(spawnZone.MinPoint, spawnZone.MaxPoint, weight));
+
+            Instantiate(unitPrefab, position, Quaternion.identity, gameField.transform).AddForce2D(
+                Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),
+                Mathf.Lerp(spawnZone.MinPointForce, spawnZone.MaxPointForce, weight));
         }
-        
-        
     }   
 }
