@@ -95,4 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3dc8f4151f4c23b85cc5917b94200f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simulate: 1
+  mass: 0.1
   velocity: {x: 0, y: 0, z: 0}
