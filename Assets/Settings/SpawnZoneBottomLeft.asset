@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6803607dbe0d472aa1646d71f1a3dcdd, type: 3}
   m_Name: SpawnZoneBottomLeft
   m_EditorClassIdentifier: 
-  spawnPercent: 30
+  percentPriority: 35
   minPoint: {x: 0, y: 0}
   maxPoint: {x: 0.5, y: 0}
-  angleMinPoint: 75
-  angleMaxPoint: 90
-  forceMinPoint: 5
-  forceMaxPoint: 5
+  minPointAngle: 55
+  maxPointAngle: 90
+  minPointForce: 30
+  maxPointForce: 30

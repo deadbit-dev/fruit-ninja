@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpawnController
   m_EditorClassIdentifier: 
   spawnInterval: 5
-  spawners:
+  spawnZones:
   - {fileID: 11400000, guid: 01f7ee9f5eeabd84a86562151d1596ac, type: 2}
   - {fileID: 11400000, guid: 630bbf61fb308fd42a5a16355eaf4d41, type: 2}
   - {fileID: 11400000, guid: 74774936fb673634f8f3921d11676dda, type: 2}
