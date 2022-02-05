@@ -1,4 +1,4 @@
-using TMPro;
+using Interfaces;
 using UnityEngine;
 
 namespace Components
@@ -6,18 +6,22 @@ namespace Components
     public class GameField : MonoBehaviour
     {
         [SerializeField] private Camera screenSpace;
-        [Space] 
-        //[Header("Corners")]
-        //[SerializeField] private Vector2 bottomLeft;
-        //[SerializeField] private Vector2 topRight;
-        [SerializeField] private Bounds bounds;
+        [Space]
+        [SerializeField] private Vector2 point;
+        [SerializeField] private Vector2 size;
+        [Space]
+        [SerializeField] private BaseCollider collisionSpace;
 
-        public Vector3 UnitPointToGameFieldSpace(Vector2 unitPoint)
+        private void Start()
         {
-            // TODO: fix this method, get point in game field space with zero value by z axis
-            var gameFieldSpacePoint = screenSpace.ScreenToWorldPoint(unitPoint * new Vector2(Screen.width, Screen.height));
-            gameFieldSpacePoint.z = 0;
-            return gameFieldSpacePoint;
+           // TODO: set bounds collisionSpace by self space
+        }
+
+        public Vector3 ViewportToGameField(Vector2 viewportPoint)
+        {
+            var worldPoint = screenSpace.ViewportToWorldPoint(viewportPoint);
+            worldPoint.z = transform.position.z;
+            return worldPoint;
         }
     }
 }

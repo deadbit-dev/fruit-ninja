@@ -33,10 +33,12 @@ namespace Components
 
             var weight = Random.value;
 
-            var position = gameField.UnitPointToGameFieldSpace(
+            var position = gameField.ViewportToGameField(
                 Vector3.Lerp(spawnZone.MinPoint, spawnZone.MaxPoint, weight));
 
-            Instantiate(unitPrefab, position, Quaternion.identity, gameField.transform).AddForce2D(
+            var unit = Instantiate(unitPrefab, position, Quaternion.identity, gameField.transform);
+            
+            unit.AddForce2D(
                 Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),
                 Mathf.Lerp(spawnZone.MinPointForce, spawnZone.MaxPointForce, weight));
         }
