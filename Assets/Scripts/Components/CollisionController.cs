@@ -33,7 +33,7 @@ namespace Components
                 {
                     if (CircleColliderExitSquareCollider(collider as CircleCollider, trigger as SquareCollider))
                     {
-                        collider.CollisionExit(new Collision() {Collider = trigger});
+                        trigger.CollisionExit(new Collision() {Collider = collider});
                     }
                 }
             }
