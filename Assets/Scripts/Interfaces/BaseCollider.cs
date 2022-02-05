@@ -1,11 +1,13 @@
-using Components;
 using UnityEngine;
+using Collision = Components.Collision;
 
 namespace Interfaces
 {
     public abstract class BaseCollider: MonoBehaviour, ICollider
     {
-        public abstract void CollisionEnter(CollisionController.Collision info);
-        public abstract void CollisionExit(CollisionController.Collision info);
+        [SerializeField] private bool isTrigger;
+
+        public bool IsTrigger => isTrigger;
+        public abstract void CollisionExit(Collision info);
     }
 }

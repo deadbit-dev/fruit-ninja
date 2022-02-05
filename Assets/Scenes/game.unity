@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f243e4f78648ba953dc96f752d2fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countCollisionUnits: 10
 --- !u!4 &219742921
 Transform:
   m_ObjectHideFlags: 0
@@ -422,8 +421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenSpace: {fileID: 519420031}
-  point: {x: 0, y: 0}
-  size: {x: 1, y: 1}
   collisionSpace: {fileID: 1624889136}
 --- !u!4 &1624889135
 Transform:
@@ -451,8 +448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f88b11bb5d24464b616d3957382c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: {x: 0, y: 0}
-  size: {x: 0, y: 0}
+  isTrigger: 1
+  offset: {x: 0, y: 0}
+  size: {x: 25, y: 15}
 --- !u!1 &1812709681
 GameObject:
   m_ObjectHideFlags: 0

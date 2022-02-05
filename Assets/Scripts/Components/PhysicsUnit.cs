@@ -6,7 +6,9 @@ namespace Components
     public class PhysicsUnit : MonoBehaviour
     {
         [SerializeField] private bool simulate;
-        [Space] [SerializeField] private float mass;
+        [Space] 
+        [SerializeField] private float mass;
+        [SerializeField] private Vector3 axisGravity;
         [SerializeField] private Vector3 velocity;
 
         private const float Gravity = 9.8f;
@@ -19,7 +21,7 @@ namespace Components
 
         private void Simulate()
         {
-            velocity -= new Vector3(0, Gravity * mass, 0);
+            velocity -= axisGravity * (Gravity * mass);
             transform.position += velocity * Time.fixedDeltaTime;
         }
 

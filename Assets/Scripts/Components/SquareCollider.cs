@@ -5,16 +5,27 @@ namespace Components
 {
     public class SquareCollider : BaseCollider
     {
-        [SerializeField] private Vector2 point;
+        [SerializeField] private Vector2 offset;
         [SerializeField] private Vector2 size;
         
+        private Bounds _bounds;
         private CollisionController _collisionController;
+
+        public Vector2 Min => _bounds.min;
+
+        public Vector2 Max => _bounds.max;
 
         private void Start()
         {
+            _bounds.size = size;
             
-            _collisionController = GameObject.Find("CollisionController").GetComponent<CollisionController>();
+            _collisionController = FindObjectOfType<CollisionController>();
             _collisionController.AddCollider(this);
+        }
+
+        private void FixedUpdate()
+        {
+            _bounds.center = transform.position + (Vector3) offset;
         }
 
         private void OnDestroy()
@@ -22,14 +33,21 @@ namespace Components
            _collisionController.RemoveCollider(this); 
         }
 
-        public override void CollisionEnter(CollisionController.Collision info)
+        public override void CollisionExit(Collision info)
         {
-            
+            // TODO: as event/message, dont handling here
+            Destroy(info.Collider.gameObject);
         }
 
-        public override void CollisionExit(CollisionController.Collision info)
+#if UNITY_EDITOR        
+        private void OnDrawGizmosSelected()
         {
-            
+            _bounds.size = size;
+            _bounds.center = transform.position + (Vector3) offset;
+            UnityEditor.Handles.color = Color.green;
+            UnityEditor.Handles.DrawWireCube(_bounds.center, _bounds.size);
         }
+#endif
+        
     }
 }

@@ -1,4 +1,4 @@
-using Interfaces;
+using System;
 using UnityEngine;
 
 namespace Components
@@ -6,17 +6,9 @@ namespace Components
     public class GameField : MonoBehaviour
     {
         [SerializeField] private Camera screenSpace;
-        [Space]
-        [SerializeField] private Vector2 point;
-        [SerializeField] private Vector2 size;
-        [Space]
-        [SerializeField] private BaseCollider collisionSpace;
 
-        private void Start()
-        {
-           // TODO: set bounds collisionSpace by self space
-        }
-
+        // TODO: configuration game field by viewport space and screen space
+        
         public Vector3 ViewportToGameField(Vector2 viewportPoint)
         {
             var worldPoint = screenSpace.ViewportToWorldPoint(viewportPoint);

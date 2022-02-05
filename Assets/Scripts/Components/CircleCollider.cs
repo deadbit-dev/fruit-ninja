@@ -5,15 +5,24 @@ namespace Components
 {
     public class CircleCollider : BaseCollider
     {
-        [SerializeField] private Vector2 point;
+        [SerializeField] private Vector2 offset;
         [SerializeField] private float radius;
 
+        private Vector3 _position;
         private CollisionController _collisionController;
+
+        public Vector2 Center => _position;
+        public float Radius => radius;
         
         private void Start()
         {
-            _collisionController = GameObject.Find("CollisionController").GetComponent<CollisionController>();
+            _collisionController = FindObjectOfType<CollisionController>();
             _collisionController.AddCollider(this);
+        }
+
+        private void FixedUpdate()
+        {
+            _position = transform.position + (Vector3) offset;
         }
 
         private void OnDestroy()
@@ -21,14 +30,19 @@ namespace Components
            _collisionController.RemoveCollider(this); 
         }
 
-        public override void CollisionEnter(CollisionController.Collision info)
+        public override void CollisionExit(Collision info)
         {
             
         }
 
-        public override void CollisionExit(CollisionController.Collision info)
+#if UNITY_EDITOR 
+        private void OnDrawGizmosSelected()
         {
-            
+            _position = transform.position + (Vector3) offset;
+            UnityEditor.Handles.color = Color.green;
+            UnityEditor.Handles.DrawWireDisc(_position, Vector3.forward, radius);
         }
+#endif
+        
     }
 }
