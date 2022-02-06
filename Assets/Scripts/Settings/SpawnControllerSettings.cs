@@ -13,6 +13,6 @@ namespace Settings
         public int SpawnInterval => spawnInterval;
         public SpawnZone[] SpawnZones => spawnZones;
         
-        public float[] Priorities => spawnZones.Select(spawnZone => spawnZone.PercentPriority/100).ToArray();
+        public float[] Priorities => spawnZones.Select(spawnZone => spawnZone.PriorityPercent/100).ToArray();
     }
 }
