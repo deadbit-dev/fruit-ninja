@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenSpace: {fileID: 519420031}
-  collisionSpace: {fileID: 1624889136}
+  squareCollider: {fileID: 1624889136}
 --- !u!4 &1624889135
 Transform:
   m_ObjectHideFlags: 0
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   offset: {x: 0, y: 0}
-  size: {x: 25, y: 15}
+  size: {x: 17.8, y: 10}
 --- !u!1 &1812709681
 GameObject:
   m_ObjectHideFlags: 0
