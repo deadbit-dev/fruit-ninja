@@ -16,6 +16,6 @@ MonoBehaviour:
   minPoint: {x: 0, y: 0}
   maxPoint: {x: 0, y: 0.25}
   minPointAngle: 65
-  maxPointAngle: 30
+  maxPointAngle: 55
   minPointForce: 30
-  maxPointForce: 20
+  maxPointForce: 25
