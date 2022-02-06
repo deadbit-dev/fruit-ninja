@@ -31,7 +31,7 @@ namespace Components
             {
                 foreach (var baseCollider in _colliders)
                 {
-                    if (CircleColliderOutsideSquareCollider(baseCollider as CircleCollider, trigger as SquareCollider))
+                    if (CircleColliderOutsideCollisionSpace(baseCollider as CircleCollider, trigger as CollisionSpace))
                     {
                         trigger.CollisionExitEvent(new Collision() {Collider = baseCollider});
                     }
@@ -39,12 +39,12 @@ namespace Components
             }
         }
         
-        private static bool CircleColliderOutsideSquareCollider(CircleCollider circleCollider, SquareCollider squareCollider)
+        private static bool CircleColliderOutsideCollisionSpace(CircleCollider circleCollider, CollisionSpace collisionSpace)
         {
-            return circleCollider.Center.x - circleCollider.Radius > squareCollider.Max.x ||
-                   circleCollider.Center.x + circleCollider.Radius < squareCollider.Min.x ||
-                   circleCollider.Center.y - circleCollider.Radius > squareCollider.Max.y ||
-                   circleCollider.Center.y + circleCollider.Radius < squareCollider.Min.y;
+            return circleCollider.Center.x - circleCollider.Radius > collisionSpace.Max.x ||
+                   circleCollider.Center.x + circleCollider.Radius < collisionSpace.Min.x ||
+                   circleCollider.Center.y - circleCollider.Radius > collisionSpace.Max.y ||
+                   circleCollider.Center.y + circleCollider.Radius < collisionSpace.Min.y;
         }
 
         public void AddCollider(BaseCollider baseCollider)
