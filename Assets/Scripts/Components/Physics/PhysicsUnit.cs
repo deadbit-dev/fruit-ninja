@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Components
+namespace Components.Physics
 {
     public class PhysicsUnit : MonoBehaviour
     {

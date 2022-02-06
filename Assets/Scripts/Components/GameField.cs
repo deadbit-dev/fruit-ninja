@@ -1,4 +1,6 @@
 using UnityEngine;
+using Components.Physics;
+using Collision = Components.Physics.Collision;
 
 namespace Components
 {

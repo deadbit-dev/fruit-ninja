@@ -1,6 +1,5 @@
 using System;
-using Components;
-
+using Components.Physics;
 namespace Interfaces
 {
     public interface ICollider

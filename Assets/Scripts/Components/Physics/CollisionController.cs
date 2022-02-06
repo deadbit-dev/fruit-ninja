@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 
-namespace Components
+namespace Components.Physics
 {
     public struct Collision
     {
@@ -46,15 +46,15 @@ namespace Components
                    circleCollider.Center.y - circleCollider.Radius > collisionSpace.Max.y ||
                    circleCollider.Center.y + circleCollider.Radius < collisionSpace.Min.y;
         }
-
+        
         public void AddCollider(BaseCollider baseCollider)
         {
             switch (baseCollider.IsTrigger)
             {
-                case true when !_triggers.Contains(baseCollider):
+                case true when !_triggers.Contains(baseCollider) && baseCollider is CollisionSpace:
                     _triggers.Add(baseCollider);
                     break;
-                case false when !_colliders.Contains(baseCollider):
+                case false when !_colliders.Contains(baseCollider) && baseCollider is CircleCollider:
                     _colliders.Add(baseCollider);
                     break;
             }
@@ -64,10 +64,10 @@ namespace Components
         {
             switch (baseCollider.IsTrigger)
             {
-                case true when _triggers.Contains(baseCollider):
+                case true when _triggers.Contains(baseCollider) && baseCollider is CollisionSpace:
                     _triggers.Remove(baseCollider);
                     break;
-                case false when _colliders.Contains(baseCollider):
+                case false when _colliders.Contains(baseCollider) && baseCollider is CircleCollider:
                     _colliders.Remove(baseCollider);
                     break;
             }

@@ -1,7 +1,7 @@
 using System;
-using Components;
 using UnityEngine;
-using Collision = Components.Collision;
+using Components.Physics;
+using Collision = Components.Physics.Collision;
 
 namespace Interfaces
 {

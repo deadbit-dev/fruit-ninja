@@ -1,4 +1,5 @@
 using UnityEngine;
+using Components.Physics;
 
 namespace Components
 {
