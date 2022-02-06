@@ -1,3 +1,4 @@
+using System;
 using Interfaces;
 using UnityEngine;
 
@@ -30,11 +31,6 @@ namespace Components
            _collisionController.RemoveCollider(this); 
         }
 
-        public override void CollisionExit(Collision info)
-        {
-            
-        }
-
 #if UNITY_EDITOR 
         private void OnDrawGizmosSelected()
         {
@@ -43,6 +39,6 @@ namespace Components
             UnityEditor.Handles.DrawWireDisc(_position, Vector3.forward, radius);
         }
 #endif
-        
+
     }
 }

@@ -32,13 +32,7 @@ namespace Components
         {
            _collisionController.RemoveCollider(this); 
         }
-
-        public override void CollisionExit(Collision info)
-        {
-            // TODO: as event/message, dont handling here
-            Destroy(info.Collider.gameObject);
-        }
-
+        
 #if UNITY_EDITOR        
         private void OnDrawGizmosSelected()
         {

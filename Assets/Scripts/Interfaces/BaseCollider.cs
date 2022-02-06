@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Collision = Components.Collision;
 
@@ -8,6 +9,12 @@ namespace Interfaces
         [SerializeField] private bool isTrigger;
 
         public bool IsTrigger => isTrigger;
-        public abstract void CollisionExit(Collision info);
+
+        public event Action<Collision> CollisionExit;
+
+        public void CollisionExitEvent(Collision info)
+        {
+            CollisionExit?.Invoke(info);
+        }
     }
 }

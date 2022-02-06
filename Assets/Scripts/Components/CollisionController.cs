@@ -22,24 +22,24 @@ namespace Components
 
         private void FixedUpdate()
         {
-            CircleCollidersExitSquareColliders();
+            BaseColliderExitTrigger();
         }
 
-        private void CircleCollidersExitSquareColliders()
+        private void BaseColliderExitTrigger()
         {
             foreach (var trigger in _triggers)
             {
-                foreach (var collider in _colliders)
+                foreach (var baseCollider in _colliders)
                 {
-                    if (CircleColliderExitSquareCollider(collider as CircleCollider, trigger as SquareCollider))
+                    if (CircleColliderOutsideSquareCollider(baseCollider as CircleCollider, trigger as SquareCollider))
                     {
-                        trigger.CollisionExit(new Collision() {Collider = collider});
+                        trigger.CollisionExitEvent(new Collision() {Collider = baseCollider});
                     }
                 }
             }
         }
         
-        private static bool CircleColliderExitSquareCollider(CircleCollider circleCollider, SquareCollider squareCollider)
+        private static bool CircleColliderOutsideSquareCollider(CircleCollider circleCollider, SquareCollider squareCollider)
         {
             return circleCollider.Center.x - circleCollider.Radius > squareCollider.Max.x ||
                    circleCollider.Center.x + circleCollider.Radius < squareCollider.Min.x ||
@@ -47,27 +47,29 @@ namespace Components
                    circleCollider.Center.y + circleCollider.Radius < squareCollider.Min.y;
         }
 
-        public void AddCollider(BaseCollider collider)
+        public void AddCollider(BaseCollider baseCollider)
         {
-            if (collider.IsTrigger && !_triggers.Contains(collider))
+            switch (baseCollider.IsTrigger)
             {
-                _triggers.Add(collider);
-            }
-            else if(!collider.IsTrigger && !_colliders.Contains(collider))
-            {
-                _colliders.Add(collider);
+                case true when !_triggers.Contains(baseCollider):
+                    _triggers.Add(baseCollider);
+                    break;
+                case false when !_colliders.Contains(baseCollider):
+                    _colliders.Add(baseCollider);
+                    break;
             }
         }
 
-        public void RemoveCollider(BaseCollider collider)
+        public void RemoveCollider(BaseCollider baseCollider)
         {
-            if (collider.IsTrigger && _triggers.Contains(collider))
+            switch (baseCollider.IsTrigger)
             {
-                _triggers.Remove(collider);
-            }
-            else if(!collider.IsTrigger && _colliders.Contains(collider))
-            {
-                _colliders.Remove(collider);
+                case true when _triggers.Contains(baseCollider):
+                    _triggers.Remove(baseCollider);
+                    break;
+                case false when _colliders.Contains(baseCollider):
+                    _colliders.Remove(baseCollider);
+                    break;
             }
         }
     }
