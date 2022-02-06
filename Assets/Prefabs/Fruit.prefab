@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 688841759913728875}
   - component: {fileID: 398078371017961954}
   - component: {fileID: 8149739458007504070}
+  - component: {fileID: -5459963849953062275}
   m_Layer: 0
   m_Name: Fruit
   m_TagString: Untagged
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTrigger: 0
-  center: {x: 0, y: 0}
+  offset: {x: 0, y: 0}
   radius: 0.5
 --- !u!114 &8149739458007504070
 MonoBehaviour:
@@ -115,3 +116,17 @@ MonoBehaviour:
   mass: 0.1
   axisGravity: {x: 0, y: 1, z: 0}
   velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &-5459963849953062275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026604174447914698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b18d867cf149b089d0e693d4837ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleCollider: {fileID: 398078371017961954}
+  physics: {fileID: 8149739458007504070}
