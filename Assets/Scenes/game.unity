@@ -504,7 +504,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 60cd6fc9da08d534a916ddd3712031a3, type: 2}
   gameField: {fileID: 1624889134}
-  unitPrefab: {fileID: 8149739458007504070, guid: 7caacd23f1d96a94e83dc0b79162681d, type: 3}
 --- !u!1 &1865320829
 GameObject:
   m_ObjectHideFlags: 0
