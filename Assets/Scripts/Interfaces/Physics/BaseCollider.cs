@@ -2,16 +2,16 @@ using System;
 using UnityEngine;
 using Components.Physics;
 
-namespace Interfaces
+namespace Interfaces.Physics
 {
     public abstract class BaseCollider: MonoBehaviour, ICollider
     {
         [SerializeField] private bool isTrigger;
         
-        private Components.Physics.CollisionController _collisionController;
+        private CollisionController _collisionController;
         
         public bool IsTrigger => isTrigger;
-        public event Action<CollisionInfo> CollisionExit;
+        public event Action<ICollision> CollisionExit;
         
         private void Start()
         {
@@ -24,7 +24,7 @@ namespace Interfaces
             _collisionController.RemoveCollider(this); 
         }
 
-        public void CollisionExitEvent(CollisionInfo info)
+        public void CollisionExitEvent(ICollision info)
         {
             CollisionExit?.Invoke(info);
         }

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Interfaces;
+using Interfaces.Physics;
 
 namespace Components.Physics
 {
-    public struct CollisionInfo
+    public struct CollisionInfo : ICollision
     {
-        public BaseCollider Collider;
+        public BaseCollider Collider { get; set; }
     }
     
     public class CollisionController : MonoBehaviour
@@ -33,7 +33,7 @@ namespace Components.Physics
                 {
                     if (CircleColliderOutsideCollisionSpace(baseCollider as CircleCollider, trigger as CollisionSpace))
                     {
-                        trigger.CollisionExitEvent(new CollisionInfo() {Collider = baseCollider});
+                        trigger.CollisionExitEvent(new CollisionInfo {Collider = baseCollider});
                     }
                 }
             }

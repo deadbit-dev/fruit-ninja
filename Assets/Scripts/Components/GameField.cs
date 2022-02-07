@@ -1,6 +1,7 @@
 using UnityEngine;
 using Components.Physics;
 using Components.Utils;
+using Interfaces.Physics;
 
 namespace Components
 {
@@ -17,7 +18,7 @@ namespace Components
             collisionSpace.CollisionExit += CollisionExit;
         }
         
-        private static void CollisionExit(CollisionInfo info)
+        private static void CollisionExit(ICollision info)
         {
             Destroy(info.Collider.gameObject);
         }

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Interfaces;
+using Interfaces.Physics;
 
 namespace Components.Physics
 {
@@ -7,7 +7,7 @@ namespace Components.Physics
     {
         [SerializeField] private Vector2 offset;
         [SerializeField] private Vector2 extent;
-        
+
         private Vector3 _position;
         
         public Vector2 Min => _position - (Vector3) extent;
