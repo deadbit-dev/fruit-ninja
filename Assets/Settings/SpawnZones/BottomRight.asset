@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: BottomRight
   m_EditorClassIdentifier: 
   priorityPercent: 35
-  minPoint:
+  firstPoint:
     x: 0.5
     y: 0
-  maxPoint:
+  secondPoint:
     x: 1
     y: 0
-  minPointAngle: 90
-  maxPointAngle: 125
-  minPointForce: 30
-  maxPointForce: 30
+  firstPointAngle: 90
+  secondPointAngle: 125
+  firstPointForceMin: 20
+  firstPointForceMax: 30
+  secondPointForceMin: 25
+  secondPointForceMax: 35

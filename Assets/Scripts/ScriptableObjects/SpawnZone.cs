@@ -1,5 +1,6 @@
 using UnityEngine;
 using Components.Utils;
+using Random = UnityEngine.Random;
 
 namespace ScriptableObjects
 { 
@@ -8,23 +9,25 @@ namespace ScriptableObjects
     {
         [SerializeField] private float priorityPercent;
         [Space] 
-        [SerializeField] private ViewportPoint minPoint;
-        [SerializeField] private ViewportPoint maxPoint;
+        [SerializeField] private ViewportPoint firstPoint;
+        [SerializeField] private ViewportPoint secondPoint;
         [Space]
         [Header("Angles")]
-        [SerializeField, Range(0.0f, 360.0f)] private float minPointAngle;
-        [SerializeField, Range(0.0f, 360.0f)] private float maxPointAngle;
+        [SerializeField, Range(0.0f, 360.0f)] private float firstPointAngle;
+        [SerializeField, Range(0.0f, 360.0f)] private float secondPointAngle;
         [Space] 
         [Header("Forces")]
-        [SerializeField] private float minPointForce;
-        [SerializeField] private float maxPointForce;
+        [SerializeField] private float firstPointForceMin;
+        [SerializeField] private float firstPointForceMax;
+        [SerializeField] private float secondPointForceMin;
+        [SerializeField] private float secondPointForceMax;
 
         public float PriorityPercent => priorityPercent;
-        public ViewportPoint MinPoint => minPoint;
-        public ViewportPoint MaxPoint => maxPoint;
-        public float MinPointAngle => minPointAngle * Mathf.Deg2Rad;
-        public float MinPointForce => minPointForce;
-        public float MaxPointAngle => maxPointAngle * Mathf.Deg2Rad;
-        public float MaxPointForce => maxPointForce;
+        public ViewportPoint FirstPoint => firstPoint;
+        public ViewportPoint SecondPoint => secondPoint;
+        public float MinPointAngle => firstPointAngle * Mathf.Deg2Rad;
+        public float MinPointForce => Random.Range(firstPointForceMin, firstPointForceMax);
+        public float MaxPointAngle => secondPointAngle * Mathf.Deg2Rad;
+        public float MaxPointForce => Random.Range(secondPointForceMin, secondPointForceMax);
     }
 }

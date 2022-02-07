@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 630bbf61fb308fd42a5a16355eaf4d41, type: 2}
   - {fileID: 11400000, guid: 74774936fb673634f8f3921d11676dda, type: 2}
   - {fileID: 11400000, guid: 7770fa8f3ecf4c742aed57e1fe5408e2, type: 2}
+  spawnPack: {fileID: 11400000, guid: d90375b6149a84e45b55d45240bafe97, type: 2}

@@ -1,5 +1,6 @@
+using System.Collections;
+using ScriptableObjects;
 using UnityEngine;
-using Components.Physics;
 
 namespace Components 
 {
@@ -7,42 +8,56 @@ namespace Components
     {
         [SerializeField] private ScriptableObjects.SpawnController settings;
         [SerializeField] private GameField gameField;
-        [SerializeField] private PhysicsUnit unitPrefab;
-        
-        private float _spawnInterval;
-        
+
         private void Start()
         {
-            _spawnInterval = settings.SpawnInterval;
+            StartSpawn();
         }
 
-        private void Update()
-        { 
-            if (_spawnInterval <= 0)
-            {
-                Spawn();
-                _spawnInterval = settings.SpawnInterval;
-            }
-
-            _spawnInterval -= Time.deltaTime;
-        }
-
-        private void Spawn()
+        public void StartSpawn()
         {
-            var spawnZone = settings.SpawnZones[Utils.Random.RandomRangeWeight(settings.Priorities)];
+            StartCoroutine(SpawnWithInterval(settings.SpawnInterval));
+        }
 
-            var weight = Random.value;
+        public void StopSpawn()
+        {
+            StopCoroutine(SpawnWithInterval(settings.SpawnInterval));
+        }
 
-            var position = Vector3.Lerp(
-                gameField.ViewportField.ViewportToWorld(spawnZone.MinPoint), 
-                gameField.ViewportField.ViewportToWorld(spawnZone.MaxPoint), 
-                weight);
+        private IEnumerator SpawnWithInterval(float interval)
+        {
+            while (true)
+            { 
+                yield return new WaitForSeconds(interval);
+                
+                var spawnZone = settings.SpawnZones[Utils.Random.RandomRangeWeight(settings.Priorities)];
+                
+                StartCoroutine(SpawnWithDelay(
+                    spawnZone,
+                    gameField.ViewportField.ViewportToWorld(spawnZone.FirstPoint),
+                    gameField.ViewportField.ViewportToWorld(spawnZone.SecondPoint),
+                    settings.SpawnPack.Delay));               
+            }
+        }
 
-            var unit = Instantiate(unitPrefab, position, Quaternion.identity, gameField.transform);
-            
-            unit.AddForce2D(
-                Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),
-                Mathf.Lerp(spawnZone.MinPointForce, spawnZone.MaxPointForce, weight));
+        private IEnumerator SpawnWithDelay(SpawnZone spawnZone, Vector3 pointA, Vector3 pointB, float delay)
+        {
+            for (var i = 0; i < settings.SpawnPack.Count; i++)
+            {
+                var weight = Random.value;
+                
+                var position = Vector3.Lerp(pointA, pointB, weight);
+
+                var unitPrefab = settings.SpawnPack.UnitTypes[Utils.Random.RandomRangeWeight(settings.SpawnPack.Priorities)];
+                
+                var unit = Instantiate(unitPrefab, position, Quaternion.identity, gameField.transform);
+                
+                unit.AddForce2D(
+                    Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),
+                    Mathf.Lerp(spawnZone.MinPointForce, spawnZone.MaxPointForce, weight));
+
+                yield return new WaitForSeconds(delay);
+            }
         }
     }   
 }
