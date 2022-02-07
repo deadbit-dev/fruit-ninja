@@ -4,7 +4,7 @@ namespace Interfaces
 {
     public interface ICollider
     { 
-        event Action<Collision> CollisionExit;
-        void CollisionExitEvent(Collision info);
+        event Action<CollisionInfo> CollisionExit;
+        void CollisionExitEvent(CollisionInfo info);
     }
 }

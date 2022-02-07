@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Settings;
 using UnityEngine;
 using Components.Physics;
 
@@ -7,7 +5,7 @@ namespace Components
 {
     public class SpawnController : MonoBehaviour
     {
-        [SerializeField] private SpawnControllerSettings settings;
+        [SerializeField] private ScriptableObjects.SpawnController settings;
         [SerializeField] private GameField gameField;
         [SerializeField] private PhysicsUnit unitPrefab;
         
@@ -31,7 +29,7 @@ namespace Components
 
         private void Spawn()
         {
-            var spawnZone = settings.SpawnZones[Utils.RandomRangeWeight(settings.Priorities)];
+            var spawnZone = settings.SpawnZones[Utils.Random.RandomRangeWeight(settings.Priorities)];
 
             var weight = Random.value;
 

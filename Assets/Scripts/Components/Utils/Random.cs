@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-namespace Components
+namespace Components.Utils
 {
-    public static class Utils
+    public static class Random
     {
         public static int RandomRangeWeight(IReadOnlyList<float> probes)
         {
             var total = probes.Sum();
-            var randomPoint = Random.value * total;
+            var randomPoint = UnityEngine.Random.value * total;
             
             for (var i = 0; i < probes.Count; i++)
             {

@@ -1,5 +1,5 @@
-using Interfaces;
 using UnityEngine;
+using Interfaces;
 
 namespace Components.Physics
 {

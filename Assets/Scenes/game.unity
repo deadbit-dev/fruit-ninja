@@ -400,7 +400,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1624889135}
   - component: {fileID: 1624889136}
-  - component: {fileID: 1624889137}
   - component: {fileID: 1624889134}
   m_Layer: 0
   m_Name: GameField
@@ -421,7 +420,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9343cb0b94de1943e08d275b02d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewportField: {fileID: 1624889137}
+  viewportField:
+    minPoint:
+      x: 0
+      y: 0
+    maxPoint:
+      x: 1
+      y: 1
+    transform: {fileID: 1624889135}
+    screenSpace: {fileID: 519420031}
   collisionSpace: {fileID: 1624889136}
 --- !u!4 &1624889135
 Transform:
@@ -452,25 +459,6 @@ MonoBehaviour:
   isTrigger: 1
   offset: {x: 0, y: 0}
   extent: {x: 8.89, y: 5}
---- !u!114 &1624889137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624889133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac93384fb834445b09195f77cbbdc11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minPoint:
-    x: 0
-    y: 0
-  maxPoint:
-    x: 1
-    y: 1
-  screenSpace: {fileID: 519420031}
 --- !u!1 &1812709681
 GameObject:
   m_ObjectHideFlags: 0

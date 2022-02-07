@@ -1,10 +1,10 @@
-using Components;
 using UnityEngine;
+using Components.Utils;
 
-namespace Settings
+namespace ScriptableObjects
 { 
     [CreateAssetMenu(fileName = "SpawnZone", menuName = "Spawn Zone", order = 0)]
-    public class SpawnZone: ScriptableObject
+    public class SpawnZone : ScriptableObject
     {
         [SerializeField] private float priorityPercent;
         [Space] 

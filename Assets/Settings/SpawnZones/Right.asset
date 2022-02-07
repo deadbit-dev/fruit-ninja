@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6803607dbe0d472aa1646d71f1a3dcdd, type: 3}
-  m_Name: SpawnZoneRight
+  m_Name: Right
   m_EditorClassIdentifier: 
   priorityPercent: 15
   minPoint:

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Components.Physics;
-using Collision = Components.Physics.Collision;
+using Components.Utils;
 
 namespace Components
 {
@@ -17,10 +17,25 @@ namespace Components
             collisionSpace.CollisionExit += CollisionExit;
         }
         
-        private static void CollisionExit(Collision info)
+        private static void CollisionExit(CollisionInfo info)
         {
             Destroy(info.Collider.gameObject);
         }
-
+        
+#if UNITY_EDITOR        
+        private void OnDrawGizmosSelected()
+        {
+            if (viewportField == null)
+            {
+                return;
+            }
+            
+            UnityEditor.Handles.color = Color.red;
+            UnityEditor.Handles.DrawWireCube(
+                viewportField.CenterPointFieldToWorld,
+                viewportField.MaxPointFieldToWorld - viewportField.MinPointFieldToWorld);
+        }
+#endif
+ 
     }
 }

@@ -1,10 +1,10 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Settings
+namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "SpawnController", menuName = "Spawn Controller Settings", order = 0)]
-    public class SpawnControllerSettings : ScriptableObject
+    [CreateAssetMenu(fileName = "SpawnController", menuName = "Spawn Controller", order = 0)]
+    public class SpawnController: ScriptableObject
     {
         [SerializeField] private int spawnInterval;
         [Space]

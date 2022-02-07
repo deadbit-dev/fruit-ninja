@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6803607dbe0d472aa1646d71f1a3dcdd, type: 3}
-  m_Name: SpawnZoneBottomRight
+  m_Name: BottomLeft
   m_EditorClassIdentifier: 
   priorityPercent: 35
   minPoint:
-    x: 0.5
+    x: 0
     y: 0
   maxPoint:
-    x: 1
+    x: 0.5
     y: 0
-  minPointAngle: 90
-  maxPointAngle: 125
+  minPointAngle: 55
+  maxPointAngle: 90
   minPointForce: 30
   maxPointForce: 30
