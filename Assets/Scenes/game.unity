@@ -420,6 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9343cb0b94de1943e08d275b02d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionSpace: {fileID: 1624889136}
+  screenSpace: {fileID: 519420031}
   viewportField:
     minPoint:
       x: 0
@@ -427,9 +429,6 @@ MonoBehaviour:
     maxPoint:
       x: 1
       y: 1
-    transform: {fileID: 1624889135}
-    screenSpace: {fileID: 519420031}
-  collisionSpace: {fileID: 1624889136}
 --- !u!4 &1624889135
 Transform:
   m_ObjectHideFlags: 0
@@ -458,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   offset: {x: 0, y: 0}
-  extent: {x: 8.89, y: 5}
+  extent: {x: 8.88245, y: 5}
 --- !u!1 &1812709681
 GameObject:
   m_ObjectHideFlags: 0

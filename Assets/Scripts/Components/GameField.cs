@@ -7,14 +7,16 @@ namespace Components
 {
     public class GameField : MonoBehaviour
     {
-        [SerializeField] private ViewportField viewportField;
         [SerializeField] private CollisionSpace collisionSpace;
-
-        public ViewportField ViewportField => viewportField;
+        [Space]
+        [SerializeField] private Camera screenSpace;
+        [Space]
+        [SerializeField] private ViewportField viewportField;
 
         private void Start()
         {
-            collisionSpace.Max = viewportField.MaxPointFieldToWorld;
+            collisionSpace.Offset = (Vector2) Center - (collisionSpace.Center - collisionSpace.Offset);
+            collisionSpace.Size = Size; 
             collisionSpace.CollisionExit += CollisionExit;
         }
         
@@ -22,19 +24,44 @@ namespace Components
         {
             Destroy(info.Collider.gameObject);
         }
-        
-#if UNITY_EDITOR        
-        private void OnDrawGizmosSelected()
+
+        public Vector2 ViewportPointToScreenPoint(ViewportPoint viewportPoint)
         {
-            if (viewportField == null)
+            if (screenSpace == null)
+            {
+                return (Vector2) viewportPoint;
+            }
+
+            return screenSpace.ViewportToScreenPoint((Vector2) viewportPoint);
+        }
+        
+        public Vector3 ViewportPointToWorldPoint(ViewportPoint viewportPoint)
+        {
+            if (screenSpace == null)
+            {
+                return (Vector2) viewportPoint;
+            }
+        
+            var worldPoint = screenSpace.ViewportToWorldPoint((Vector2) viewportPoint);
+            worldPoint.z = transform.position.z;
+            return worldPoint;
+        }
+
+        public Vector3 Center => ViewportPointToWorldPoint(viewportField.CenterPoint);
+        public Vector3 Min => ViewportPointToWorldPoint(viewportField.MinPoint);
+        public Vector3 Max => ViewportPointToWorldPoint(viewportField.MaxPoint);
+        public Vector3 Size => Max - Min;
+
+#if UNITY_EDITOR        
+        private void OnDrawGizmos()
+        {
+            if (viewportField == null || collisionSpace == null)
             {
                 return;
             }
             
-            UnityEditor.Handles.color = Color.red;
-            UnityEditor.Handles.DrawWireCube(
-                viewportField.CenterPointFieldToWorld,
-                viewportField.MaxPointFieldToWorld - viewportField.MinPointFieldToWorld);
+            collisionSpace.Offset = (Vector2) Center - (collisionSpace.Center - collisionSpace.Offset);
+            collisionSpace.Size = Size;
         }
 #endif
  

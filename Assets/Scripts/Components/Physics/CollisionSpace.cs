@@ -8,27 +8,27 @@ namespace Components.Physics
         [SerializeField] private Vector2 offset;
         [SerializeField] private Vector2 extent;
 
-        private Vector3 _position;
-        
-        public Vector2 Min => _position - (Vector3) extent;
+        public Vector2 Center => (Vector2) transform.position + offset;
+        public Vector2 Min => Center - extent;
+        public Vector2 Max => Center + extent;
 
-        public Vector2 Max
+        public Vector2 Offset
         {
-            get => _position + (Vector3) extent;
-            set => extent = _position + (Vector3) value;
+            get => offset;
+            set => offset = value;
         }
-
-        private void FixedUpdate()
+        
+        public Vector2 Size
         {
-            _position = transform.position + (Vector3) offset;
+            get => Max - Min;
+            set => extent = value / 2;
         }
 
 #if UNITY_EDITOR        
         private void OnDrawGizmosSelected()
         {
-            _position = transform.position + (Vector3) offset;
             UnityEditor.Handles.color = Color.green;
-            UnityEditor.Handles.DrawWireCube(_position, Max - Min);
+            UnityEditor.Handles.DrawWireCube(Center, Size);
         }
 #endif
         

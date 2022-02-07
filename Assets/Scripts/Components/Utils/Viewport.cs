@@ -17,6 +17,16 @@ namespace Components.Utils
         }
         public float X => x;
         public float Y => y;
+        
+        public static ViewportPoint operator +(ViewportPoint pointA, ViewportPoint pointB)
+        { 
+            return new ViewportPoint(pointA.x + pointB.x, pointA.y + pointB.y);
+        }
+        
+        public static ViewportPoint operator -(ViewportPoint pointA, ViewportPoint pointB)
+        {
+            return new ViewportPoint(pointA.x - pointB.x, pointA.y - pointB.y);
+        }
     
         public static implicit operator Vector2(ViewportPoint point)
         {
@@ -29,30 +39,15 @@ namespace Components.Utils
     {
         [SerializeField] private ViewportPoint minPoint;
         [SerializeField] private ViewportPoint maxPoint;
-        [Space] 
-        [SerializeField] private Transform transform;
-        [SerializeField] private Camera screenSpace;
     
         public ViewportPoint MinPoint => minPoint;
+        
         public ViewportPoint MaxPoint => maxPoint;
-    
+        
+        public ViewportPoint Size => MaxPoint - MinPoint;
+        
         public ViewportPoint CenterPoint => new ViewportPoint(
             (maxPoint.X - minPoint.X) * 0.5f + minPoint.X, 
             (maxPoint.Y - minPoint.Y) * 0.5f + minPoint.Y);
-        
-        public Vector3 MinPointFieldToWorld => ViewportToWorld(minPoint);
-        public Vector3 MaxPointFieldToWorld => ViewportToWorld(maxPoint);
-        public Vector3 CenterPointFieldToWorld => ViewportToWorld(CenterPoint);
-        public Vector3 ViewportToWorld(ViewportPoint viewportPoint)
-        {
-            if (transform == null || screenSpace == null)
-            {
-                return (Vector2) viewportPoint;
-            }
-        
-            var worldPoint = screenSpace.ViewportToWorldPoint((Vector2) viewportPoint);
-            worldPoint.z = transform.position.z;
-            return worldPoint;
-        }
     }
 }
