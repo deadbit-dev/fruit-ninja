@@ -130,3 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circleCollider: {fileID: 3659480202841391339}
   physics: {fileID: 5068492606130922959}
+  rotateAnimationAngleMin: -10
+  rotateAnimationAngleMax: 10
