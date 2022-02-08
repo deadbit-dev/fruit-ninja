@@ -7,7 +7,7 @@ namespace Components
     public class SpawnController : MonoBehaviour
     {
         [SerializeField] private ScriptableObjects.SpawnController settings;
-        [SerializeField] private GameField gameField;
+        [SerializeField] private GameField2D gameField2D;
 
         private void Start()
         {
@@ -34,8 +34,8 @@ namespace Components
                 
                 StartCoroutine(SpawnUnitWithDelay(
                     spawnZone,
-                    gameField.ViewportPointToWorldPoint(spawnZone.FirstPoint),
-                    gameField.ViewportPointToWorldPoint(spawnZone.SecondPoint),
+                    gameField2D.ViewportPointToWorldPoint2D(spawnZone.FirstPoint),
+                    gameField2D.ViewportPointToWorldPoint2D(spawnZone.SecondPoint),
                     settings.SpawnPack.Delay));               
             }
         }
@@ -45,10 +45,10 @@ namespace Components
             for (var i = 0; i < settings.SpawnPack.Count; i++)
             {
                 var weight = Random.value;
-                
+
                 var unit = Instantiate(
                     settings.SpawnPack.UnitTypes[Utils.Random.RandomRangeWeight(settings.SpawnPack.Priorities)],
-                    Vector3.Lerp(pointA, pointB, weight), Quaternion.identity, gameField.transform);
+                    Vector3.Lerp(pointA, pointB, weight), Quaternion.identity, gameField2D.transform);
                 
                 unit.AddForce2D(
                     Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),

@@ -7,8 +7,7 @@ namespace Components.Utils
     {
         public static int RandomRangeWeight(IReadOnlyList<float> probes)
         {
-            var total = probes.Sum();
-            var randomPoint = UnityEngine.Random.value * total;
+            var randomPoint = UnityEngine.Random.value * probes.Sum();
             
             for (var i = 0; i < probes.Count; i++)
             {

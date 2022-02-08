@@ -3,7 +3,7 @@ using Interfaces.Physics;
 
 namespace Components.Physics
 {
-    public class CollisionSpace : BaseCollider
+    public class CollisionSpace2D : BaseCollider
     {
         [SerializeField] private Vector2 offset;
         [SerializeField] private Vector2 extent;

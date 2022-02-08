@@ -27,7 +27,17 @@ namespace Components.Utils
         {
             return new ViewportPoint(pointA.x - pointB.x, pointA.y - pointB.y);
         }
-    
+
+        public static ViewportPoint operator *(ViewportPoint pointA, ViewportPoint pointB)
+        {
+            return new ViewportPoint(pointA.x * pointB.x, pointA.y * pointB.y);
+        }
+
+        public static ViewportPoint operator *(ViewportPoint point, float scalar)
+        {
+            return new ViewportPoint(point.x * scalar, point.y * scalar);
+        }
+
         public static implicit operator Vector2(ViewportPoint point)
         {
             return new Vector2(point.x, point.y);
@@ -37,17 +47,15 @@ namespace Components.Utils
     [Serializable]
     public class ViewportField
     {
-        [SerializeField] private ViewportPoint minPoint;
-        [SerializeField] private ViewportPoint maxPoint;
+        [SerializeField] private ViewportPoint min;
+        [SerializeField] private ViewportPoint max;
     
-        public ViewportPoint MinPoint => minPoint;
+        public ViewportPoint Min => min;
         
-        public ViewportPoint MaxPoint => maxPoint;
+        public ViewportPoint Max => max;
         
-        public ViewportPoint Size => MaxPoint - MinPoint;
-        
-        public ViewportPoint CenterPoint => new ViewportPoint(
-            (maxPoint.X - minPoint.X) * 0.5f + minPoint.X, 
-            (maxPoint.Y - minPoint.Y) * 0.5f + minPoint.Y);
+        public ViewportPoint Size => Max - Min;
+
+        public ViewportPoint Center => Size * 0.5f + Min; 
     }
 }

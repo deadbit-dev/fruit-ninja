@@ -31,7 +31,7 @@ namespace Components.Physics
             {
                 foreach (var baseCollider in _colliders)
                 {
-                    if (CircleColliderOutsideCollisionSpace(baseCollider as CircleCollider, trigger as CollisionSpace))
+                    if (CircleColliderOutsideCollisionSpace(baseCollider as CircleCollider, trigger as CollisionSpace2D))
                     {
                         trigger.CollisionExitEvent(new CollisionInfo {Collider = baseCollider});
                     }
@@ -39,19 +39,19 @@ namespace Components.Physics
             }
         }
         
-        private static bool CircleColliderOutsideCollisionSpace(CircleCollider circleCollider, CollisionSpace collisionSpace)
+        private static bool CircleColliderOutsideCollisionSpace(CircleCollider circleCollider, CollisionSpace2D collisionSpace2D)
         {
-            return circleCollider.Center.x - circleCollider.Radius > collisionSpace.Max.x ||
-                   circleCollider.Center.x + circleCollider.Radius < collisionSpace.Min.x ||
-                   circleCollider.Center.y - circleCollider.Radius > collisionSpace.Max.y ||
-                   circleCollider.Center.y + circleCollider.Radius < collisionSpace.Min.y;
+            return circleCollider.Center.x - circleCollider.Radius > collisionSpace2D.Max.x ||
+                   circleCollider.Center.x + circleCollider.Radius < collisionSpace2D.Min.x ||
+                   circleCollider.Center.y - circleCollider.Radius > collisionSpace2D.Max.y ||
+                   circleCollider.Center.y + circleCollider.Radius < collisionSpace2D.Min.y;
         }
         
         public void AddCollider(BaseCollider baseCollider)
         {
             switch (baseCollider.IsTrigger)
             {
-                case true when !_triggers.Contains(baseCollider) && baseCollider is CollisionSpace:
+                case true when !_triggers.Contains(baseCollider) && baseCollider is CollisionSpace2D:
                     _triggers.Add(baseCollider);
                     break;
                 case false when !_colliders.Contains(baseCollider) && baseCollider is CircleCollider:
@@ -64,7 +64,7 @@ namespace Components.Physics
         {
             switch (baseCollider.IsTrigger)
             {
-                case true when _triggers.Contains(baseCollider) && baseCollider is CollisionSpace:
+                case true when _triggers.Contains(baseCollider) && baseCollider is CollisionSpace2D:
                     _triggers.Remove(baseCollider);
                     break;
                 case false when _colliders.Contains(baseCollider) && baseCollider is CircleCollider:

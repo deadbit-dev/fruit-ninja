@@ -420,13 +420,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9343cb0b94de1943e08d275b02d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionSpace: {fileID: 1624889136}
+  collisionSpace2D: {fileID: 1624889136}
   screenSpace: {fileID: 519420031}
   viewportField:
-    minPoint:
+    min:
       x: 0
       y: 0
-    maxPoint:
+    max:
       x: 1
       y: 1
 --- !u!4 &1624889135
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 60cd6fc9da08d534a916ddd3712031a3, type: 2}
-  gameField: {fileID: 1624889134}
+  gameField2D: {fileID: 1624889134}
 --- !u!1 &1865320829
 GameObject:
   m_ObjectHideFlags: 0
