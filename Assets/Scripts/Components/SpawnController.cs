@@ -16,12 +16,12 @@ namespace Components
 
         public void StartSpawn()
         {
-            StartCoroutine(SpawnPackWithInterval(settings.SpawnInterval));
+            StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate(Time.time / settings.Duration)));
         }
 
         public void StopSpawn()
         {
-            StopCoroutine(SpawnPackWithInterval(settings.SpawnInterval));
+            StopCoroutine("SpawnPackWithInterval");
         }
 
         private IEnumerator SpawnPackWithInterval(float interval)
@@ -36,13 +36,13 @@ namespace Components
                     spawnZone,
                     gameField2D.ViewportPointToWorldPoint2D(spawnZone.FirstPoint),
                     gameField2D.ViewportPointToWorldPoint2D(spawnZone.SecondPoint),
-                    settings.SpawnPack.Delay));               
+                    settings.SpawnPack.DelayCurve.Evaluate(Time.time / settings.Duration)));               
             }
         }
 
         private IEnumerator SpawnUnitWithDelay(SpawnZone spawnZone, Vector3 pointA, Vector3 pointB, float delay)
         {
-            for (var i = 0; i < settings.SpawnPack.Count; i++)
+            for (var i = 0; i < settings.SpawnPack.CountCurve.Evaluate(Time.time / settings.Duration); i++)
             {
                 var weight = Random.value;
 
