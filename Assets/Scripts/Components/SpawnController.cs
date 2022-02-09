@@ -21,7 +21,7 @@ namespace Components
 
         public void StopSpawn()
         {
-            StopCoroutine("SpawnPackWithInterval");
+            StopCoroutine(nameof(SpawnPackWithInterval));
         }
 
         private IEnumerator SpawnPackWithInterval(float interval)
@@ -34,8 +34,8 @@ namespace Components
                 
                 StartCoroutine(SpawnUnitWithDelay(
                     spawnZone,
-                    gameField2D.ViewportPointToWorldPoint2D(spawnZone.FirstPoint),
-                    gameField2D.ViewportPointToWorldPoint2D(spawnZone.SecondPoint),
+                    gameField2D.ViewportPointToGameField2D(spawnZone.FirstPoint),
+                    gameField2D.ViewportPointToGameField2D(spawnZone.SecondPoint),
                     settings.SpawnPack.DelayCurve.Evaluate(Time.time / settings.Duration)));               
             }
         }

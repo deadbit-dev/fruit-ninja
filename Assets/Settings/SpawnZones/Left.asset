@@ -19,9 +19,9 @@ MonoBehaviour:
   secondPoint:
     x: 0
     y: 0.25
-  firstPointAngle: 55
-  secondPointAngle: 45
-  firstPointForceMin: 25
-  firstPointForceMax: 35
-  secondPointForceMin: 15
-  secondPointForceMax: 25
+  firstPointAngle: 60
+  secondPointAngle: 50
+  firstPointForceMin: 20
+  firstPointForceMax: 25
+  secondPointForceMin: 10
+  secondPointForceMax: 20

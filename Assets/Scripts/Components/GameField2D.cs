@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Components.Physics;
 using Components.Utils;
@@ -13,12 +14,21 @@ namespace Components
         [Space]
         [SerializeField] private ViewportField viewportField;
 
-        private void Start()
+        private void Awake()
         {
             SetSizeCollisionSpace2D();
+        }
+
+        private void OnEnable()
+        {
             collisionSpace2D.CollisionExit += CollisionExit;
         }
-        
+
+        private void OnDisable()
+        {
+            collisionSpace2D.CollisionExit -= CollisionExit;
+        }
+
         private static void CollisionExit(ICollision info)
         {
             Destroy(info.Collider.gameObject);
@@ -33,7 +43,7 @@ namespace Components
                                     screenSpace.ViewportToWorldPoint((Vector2) viewportField.Min);
         }
 
-        public Vector3 ViewportPointToWorldPoint2D(ViewportPoint viewportPoint)
+        public Vector3 ViewportPointToGameField2D(ViewportPoint viewportPoint)
         {
             if (screenSpace == null)
             {
@@ -41,9 +51,14 @@ namespace Components
             }
             
             var worldPoint2D = screenSpace.ViewportToWorldPoint((Vector2) (viewportField.Size * viewportPoint + viewportField.Min));
-            
             worldPoint2D.z = transform.position.z;
-            
+            return worldPoint2D;
+        }
+
+        public Vector3 ScreenPointToGameField2D(Vector2 point)
+        {
+            var worldPoint2D = screenSpace.ScreenToWorldPoint(point);
+            worldPoint2D.z = transform.position.z;
             return worldPoint2D;
         }
 

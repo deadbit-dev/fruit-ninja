@@ -18,7 +18,7 @@ namespace Interfaces.Physics
             _collisionController = FindObjectOfType<CollisionController>();
             _collisionController.AddCollider(this);
         }
-        
+
         private void OnDestroy()
         {
             _collisionController.RemoveCollider(this); 
