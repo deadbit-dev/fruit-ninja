@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Components.Physics;
 
 namespace Interfaces.Physics
 {
@@ -8,20 +7,14 @@ namespace Interfaces.Physics
     {
         [SerializeField] private bool isTrigger;
         
-        private CollisionController _collisionController;
-        
         public bool IsTrigger => isTrigger;
+        public event Action<ICollision> CollisionEnter;
         public event Action<ICollision> CollisionExit;
-        
-        private void Start()
-        {
-            _collisionController = FindObjectOfType<CollisionController>();
-            _collisionController.AddCollider(this);
-        }
 
-        private void OnDestroy()
+
+        public void CollisionEnterEvent(ICollision info)
         {
-            _collisionController.RemoveCollider(this); 
+            CollisionEnter?.Invoke(info);
         }
 
         public void CollisionExitEvent(ICollision info)

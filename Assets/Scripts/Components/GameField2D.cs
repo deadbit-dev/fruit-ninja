@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Components.Physics;
 using Components.Utils;
@@ -31,6 +30,11 @@ namespace Components
 
         private static void CollisionExit(ICollision info)
         {
+            if (info.Collider == null)
+            {
+                return;
+            }
+            
             Destroy(info.Collider.gameObject);
         }
 
