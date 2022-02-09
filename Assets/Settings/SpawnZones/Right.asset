@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6803607dbe0d472aa1646d71f1a3dcdd, type: 3}
   m_Name: Right
   m_EditorClassIdentifier: 
-  priorityPercent: 15
   firstPoint:
     x: 1
     y: 0
   secondPoint:
     x: 1
     y: 0.25
-  firstPointAngle: 120
-  secondPointAngle: 130
-  firstPointForceMin: 20
-  firstPointForceMax: 25
-  secondPointForceMin: 10
-  secondPointForceMax: 20
+  firstPointAngle: 115
+  secondPointAngle: 125
+  firstPointForceMin: 17
+  firstPointForceMax: 17
+  secondPointForceMin: 15
+  secondPointForceMax: 15
+  minAngle: -10
+  maxAngle: 10

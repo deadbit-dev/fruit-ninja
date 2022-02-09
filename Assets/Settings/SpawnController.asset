@@ -18,18 +18,18 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 5
-      inSlope: 0
-      outSlope: 0
+      value: 3.5
+      inSlope: -1.5
+      outSlope: -1.5
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 5
-      inSlope: 0
-      outSlope: 0
+      value: 2
+      inSlope: -1.5
+      outSlope: -1.5
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -38,8 +38,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   spawnZones:
-  - {fileID: 11400000, guid: 01f7ee9f5eeabd84a86562151d1596ac, type: 2}
-  - {fileID: 11400000, guid: 630bbf61fb308fd42a5a16355eaf4d41, type: 2}
-  - {fileID: 11400000, guid: 74774936fb673634f8f3921d11676dda, type: 2}
-  - {fileID: 11400000, guid: 7770fa8f3ecf4c742aed57e1fe5408e2, type: 2}
+  - priorityPercent: 45
+    spawnZone: {fileID: 11400000, guid: 01f7ee9f5eeabd84a86562151d1596ac, type: 2}
+  - priorityPercent: 45
+    spawnZone: {fileID: 11400000, guid: 630bbf61fb308fd42a5a16355eaf4d41, type: 2}
+  - priorityPercent: 5
+    spawnZone: {fileID: 11400000, guid: 74774936fb673634f8f3921d11676dda, type: 2}
+  - priorityPercent: 5
+    spawnZone: {fileID: 11400000, guid: 7770fa8f3ecf4c742aed57e1fe5408e2, type: 2}
   spawnPack: {fileID: 11400000, guid: d90375b6149a84e45b55d45240bafe97, type: 2}
