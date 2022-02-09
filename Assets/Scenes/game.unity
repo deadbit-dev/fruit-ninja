@@ -334,7 +334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ce6ab45738ffc7a43b5b1276b07d70e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 517e8f3533953364dbe41d74e6c07567, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -505,6 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 219742923}
   gameField2D: {fileID: 1624889134}
+  trail: {fileID: 0}
   minDistance: 3
 --- !u!1 &1624889133
 GameObject:
