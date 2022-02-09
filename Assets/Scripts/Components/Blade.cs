@@ -1,61 +1,32 @@
-using System.Collections;
+using System;
+using Components.Physics;
+using Interfaces.Physics;
 using UnityEngine;
 
 namespace Components
 {
     public class Blade : MonoBehaviour
     {
-        [SerializeField] private InputController inputController;
-        [SerializeField] private GameField2D gameField2D;
-        [SerializeField] private TrailRenderer trail;
-        [Space]
-        [SerializeField] private float minDistance;
+        [SerializeField] private CircleCollider circleCollider;
 
-        private Vector2 _startPoint;
-        private Vector2 _endPoint;
-        
         private void OnEnable()
         {
-            inputController.StartTouch += SwipeStart;
-            inputController.EndTouch += SwipeEnd;
+            circleCollider.CollisionEnter += CollisionEnter;
         }
-        
+
         private void OnDisable()
         {
-            inputController.StartTouch -= SwipeStart;
-            inputController.EndTouch -= SwipeEnd;
+            circleCollider.CollisionEnter -= CollisionEnter;
         }
 
-        private void SwipeStart(Vector2 point)
+        private static void CollisionEnter(ICollision info)
         {
-            _startPoint = gameField2D.ScreenPointToGameField2D(point);
-            transform.position = _startPoint;
-            StartCoroutine(nameof(BladeTrail));
-        }
-
-        private IEnumerator BladeTrail()
-        {
-            while (true)
+            if (info.Collider == null)
             {
-                _endPoint = gameField2D.ScreenPointToGameField2D(inputController.PrimaryPosition());
-                transform.position = _endPoint;
-                yield return null;
+                return;
             }
-        }
-
-        private void SwipeEnd(Vector2 point)
-        {
-            StopCoroutine(nameof(BladeTrail));
-            _endPoint = gameField2D.ScreenPointToGameField2D(point);
-            IsSwipe();
-        }
-
-        private void IsSwipe()
-        {
-            if (Vector3.Distance(_startPoint, _endPoint) >= minDistance)
-            {
-                Debug.Log("Swipe");
-            }
+            
+            Destroy(info.Collider.gameObject);
         }
     }
 }
