@@ -58,7 +58,7 @@ namespace Components
                     Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),
                     Mathf.Lerp(spawnZone.MinPointForce, spawnZone.MaxPointForce, weight));
                 
-                unit.AddTorque2D(spawnZone.RotateAngleForUnit);
+                unit.AddTorque2D(spawnZone.Torque);
 
                 yield return new WaitForSeconds(delay);
             }

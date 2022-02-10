@@ -31,7 +31,7 @@ namespace ScriptableObjects
         [SerializeField] private float secondPointForceMin;
         [SerializeField] private float secondPointForceMax;
         [Space] 
-        [Header("Rotate Angle Animation")] 
+        [Header("Torque")] 
         [SerializeField] private float minAngle;
         [SerializeField] private float maxAngle;
 
@@ -41,6 +41,6 @@ namespace ScriptableObjects
         public float MinPointForce => Random.Range(firstPointForceMin, firstPointForceMax);
         public float MaxPointAngle => secondPointAngle * Mathf.Deg2Rad;
         public float MaxPointForce => Random.Range(secondPointForceMin, secondPointForceMax);
-        public float RotateAngleForUnit => Random.Range(minAngle, maxAngle);
+        public float Torque => Random.Range(minAngle, maxAngle);
     }
 }
