@@ -1,4 +1,3 @@
-using System;
 using Components.Physics;
 using Interfaces.Physics;
 using UnityEngine;
@@ -26,6 +25,8 @@ namespace Components
                 return;
             }
             
+            SplatterController.Instance.InstanceSplatter(info.Collider.transform.position, Color.white);
+           
             Destroy(info.Collider.gameObject);
         }
     }
