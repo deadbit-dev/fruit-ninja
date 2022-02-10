@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -291198563
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1026468476522124443, guid: 36acecae16365794cbf3b7372d21533a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,7 +100,6 @@ MonoBehaviour:
   isTrigger: 0
   offset: {x: 0, y: 0}
   radius: 0.6
-  collisionController: {fileID: 0}
 --- !u!114 &2320287684774537756
 MonoBehaviour:
   m_ObjectHideFlags: 0
