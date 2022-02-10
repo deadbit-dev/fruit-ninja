@@ -1,5 +1,4 @@
 using System.Collections;
-using Components.Physics;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -8,7 +7,6 @@ namespace Components
     public class SpawnController : MonoBehaviour
     {
         [SerializeField] private ScriptableObjects.SpawnController settings;
-        [SerializeField] private CollisionController collisionController;
         [SerializeField] private GameField2D gameField2D;
 
         private void Start()
@@ -52,8 +50,6 @@ namespace Components
                     settings.SpawnPack.UnitTypes[Utils.Random.RandomRangeWeight(settings.SpawnPack.Priorities)],
                     Vector3.Lerp(pointA, pointB, weight), Quaternion.identity, gameField2D.transform);
 
-                unit.GetComponent<CircleCollider>().CollisionController = collisionController;
-                
                 unit.AddForce2D(
                     Mathf.Lerp(spawnZone.MinPointAngle, spawnZone.MaxPointAngle, weight),
                     Mathf.Lerp(spawnZone.MinPointForce, spawnZone.MaxPointForce, weight));

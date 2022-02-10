@@ -11,6 +11,8 @@ namespace Components.Physics
 
     public class CollisionController : MonoBehaviour
     {
+        public static CollisionController Instance;
+    
         private List<BaseCollider> _triggers;
         private List<BaseCollider> _colliders;
         
@@ -19,6 +21,8 @@ namespace Components.Physics
 
         private void Awake()
         {
+            Instance = this;
+            
             _triggers = new List<BaseCollider>();
             _colliders = new List<BaseCollider>();
             
@@ -60,8 +64,8 @@ namespace Components.Physics
                 {
                     if (trigger as CollisionSpace2D && baseCollider as CircleCollider &&
                         CircleColliderExitCollisionSpace(baseCollider as CircleCollider, trigger as CollisionSpace2D))
-                    { 
-                            trigger.CollisionExitEvent(new CollisionInfo {Collider = baseCollider});
+                    {
+                        trigger.CollisionExitEvent(new CollisionInfo {Collider = baseCollider});
                     }
                 }
             }

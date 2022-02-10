@@ -1,5 +1,5 @@
 using System.Collections;
-using Components.Physics;
+using Interfaces.Physics;
 using UnityEngine;
 
 namespace Components
@@ -7,14 +7,13 @@ namespace Components
     public class BladeController : MonoBehaviour
     {
         [SerializeField] private InputController inputController;
-        [SerializeField] private CollisionController collisionController;
         [SerializeField] private GameField2D gameField2D;
         [SerializeField] private GameObject bladePrefab;
         [Space]
         [SerializeField] private float minVelocity;
 
         private GameObject _currentBlade;
-        private CircleCollider _currentBladeCircleCollider;
+        private BaseCollider _currentBladeCollider;
         private Vector2 _previousPosition;
         
         private void OnEnable()
@@ -33,9 +32,8 @@ namespace Components
         {
             _currentBlade = Instantiate(bladePrefab, gameField2D.transform);
 
-            _currentBladeCircleCollider = _currentBlade.GetComponent<CircleCollider>();
-            _currentBladeCircleCollider.CollisionController = collisionController;
-            _currentBladeCircleCollider.enabled = false;
+            _currentBladeCollider = _currentBlade.GetComponent<BaseCollider>();
+            _currentBladeCollider.enabled = false;
             
             _previousPosition = gameField2D.ScreenPointToGameField2D(point);
             
@@ -72,11 +70,11 @@ namespace Components
 
             if (velocity < minVelocity)
             {
-                _currentBladeCircleCollider.enabled = false;
+                _currentBladeCollider.enabled = false;
                 return;
             }
             
-            _currentBladeCircleCollider.enabled = true;
+            _currentBladeCollider.enabled = true;
         }
     }
 }

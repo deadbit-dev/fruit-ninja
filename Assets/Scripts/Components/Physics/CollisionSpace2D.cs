@@ -9,8 +9,6 @@ namespace Components.Physics
         [SerializeField] private Vector2 offset;
         [SerializeField] private Vector2 extent;
 
-        [SerializeField] private CollisionController collisionController;
-        
         public Vector2 Center => (Vector2) transform.position + offset;
         public Vector2 Min => Center - extent;
         public Vector2 Max => Center + extent;
@@ -29,22 +27,22 @@ namespace Components.Physics
 
         private void Start()
         {
-            collisionController.AddCollider(this);
+            CollisionController.Instance.AddCollider(this);
         }
 
         private void OnEnable()
         {
-            collisionController.AddCollider(this);
+            CollisionController.Instance.AddCollider(this);
         }
 
         private void OnDisable() 
         {
-            collisionController.RemoveCollider(this);
+            CollisionController.Instance.RemoveCollider(this);
         }
 
         private void OnDestroy()
         {
-            collisionController.RemoveCollider(this); 
+            CollisionController.Instance.RemoveCollider(this);
         }
  
 #if UNITY_EDITOR        

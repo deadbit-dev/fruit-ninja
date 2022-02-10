@@ -8,46 +8,30 @@ namespace Components.Physics
     {
         [SerializeField] private Vector2 offset;
         [SerializeField] private float radius;
-        [SerializeField] private CollisionController collisionController;
 
         private Vector3 _position;
 
-        public CollisionController CollisionController
-        {
-            get => collisionController;
-            set => collisionController = value;
-        }
         public Vector2 Center => _position;
         public float Radius => radius;
 
         private void Start()
         {
-            collisionController.AddCollider(this);
+            CollisionController.Instance.AddCollider(this); 
         }
 
         private void OnEnable()
         {
-            if (collisionController == null)
-            {
-                return;
-            }
-
-            collisionController.AddCollider(this);
+            CollisionController.Instance.AddCollider(this); 
         }
 
         private void OnDisable() 
         {
-            if (collisionController == null)
-            {
-                return;
-            }
-            
-            collisionController.RemoveCollider(this);
+            CollisionController.Instance.RemoveCollider(this); 
         }
 
         private void OnDestroy()
         {
-            collisionController.RemoveCollider(this); 
+            CollisionController.Instance.RemoveCollider(this); 
         }
         
         private void FixedUpdate()
