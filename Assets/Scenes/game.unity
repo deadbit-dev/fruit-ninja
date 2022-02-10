@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 219742923}
   - component: {fileID: 219742922}
   - component: {fileID: 219742924}
+  - component: {fileID: 219742925}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -294,7 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 60cd6fc9da08d534a916ddd3712031a3, type: 2}
-  collisionController: {fileID: 219742920}
   gameField2D: {fileID: 1624889134}
 --- !u!114 &219742923
 MonoBehaviour:
@@ -321,10 +321,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 219742923}
-  collisionController: {fileID: 219742920}
   gameField2D: {fileID: 1624889134}
   bladePrefab: {fileID: 8145647012374914237, guid: 45b620ee10247f0479c5ca37a7dee493, type: 3}
   minVelocity: 0.001
+--- !u!114 &219742925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219742919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333ba8dec22d443c962bd50a121dc688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splatterPrefab: {fileID: 3555477366350049089, guid: 67b12fa9f6e048a4aa3ac13be95aca5b, type: 3}
+  splatterSprites:
+  - {fileID: 8531463970534289752, guid: 01186c33ca3b01c4b9100ecc883359e7, type: 3}
+  - {fileID: -560348884204696141, guid: 01186c33ca3b01c4b9100ecc883359e7, type: 3}
+  deltaAlphaFade: 0.01
+  deltaTimeFade: 0.05
 --- !u!1 &322334067
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +595,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 100
+  far clip plane: 20
   field of view: 60
   orthographic: 1
   orthographic size: 5
@@ -804,8 +821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   offset: {x: 0, y: 0}
-  extent: {x: 8.883162, y: 5}
-  collisionController: {fileID: 219742920}
+  extent: {x: 8.890785, y: 5}
 --- !u!1 &1865320829
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +892,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 20
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
