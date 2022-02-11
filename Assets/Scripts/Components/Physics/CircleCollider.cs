@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Interfaces.Physics;
 
@@ -9,9 +8,9 @@ namespace Components.Physics
         [SerializeField] private Vector2 offset;
         [SerializeField] private float radius;
 
-        private Vector3 _position;
+        private Vector3 position;
 
-        public Vector2 Center => _position;
+        public Vector2 Center => position;
         public float Radius => radius;
 
         private void Start()
@@ -36,15 +35,15 @@ namespace Components.Physics
         
         private void FixedUpdate()
         {
-            _position = transform.position + (Vector3) offset;
+            position = transform.position + (Vector3) offset;
         }
 
 #if UNITY_EDITOR 
         private void OnDrawGizmosSelected()
         {
-            _position = transform.position + (Vector3) offset;
+            position = transform.position + (Vector3) offset;
             UnityEditor.Handles.color = Color.green;
-            UnityEditor.Handles.DrawWireDisc(_position, Vector3.forward, radius);
+            UnityEditor.Handles.DrawWireDisc(position, Vector3.forward, radius);
         }
 #endif
 

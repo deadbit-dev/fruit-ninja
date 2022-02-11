@@ -12,9 +12,9 @@ namespace Components
         [Space]
         [SerializeField] private float minVelocity;
 
-        private GameObject _currentBlade;
-        private BaseCollider _currentBladeCollider;
-        private Vector2 _previousPosition;
+        private GameObject currentBlade;
+        private BaseCollider currentBladeCollider;
+        private Vector2 previousPosition;
         
         private void OnEnable()
         {
@@ -30,12 +30,12 @@ namespace Components
 
         private void TouchStart(Vector2 point)
         {
-            _currentBlade = Instantiate(bladePrefab, gameField2D.transform);
+            currentBlade = Instantiate(bladePrefab, gameField2D.transform);
 
-            _currentBladeCollider = _currentBlade.GetComponent<BaseCollider>();
-            _currentBladeCollider.enabled = false;
+            currentBladeCollider = currentBlade.GetComponent<BaseCollider>();
+            currentBladeCollider.enabled = false;
             
-            _previousPosition = gameField2D.ScreenPointToGameField2D(point);
+            previousPosition = gameField2D.ScreenPointToGameField2D(point);
             
             StartCoroutine(nameof(BladeTrail));
         }
@@ -44,13 +44,13 @@ namespace Components
         {
             while (true)
             {
-                Vector2 newPosition = gameField2D.ScreenPointToGameField2D(inputController.PrimaryPosition());
+                Vector2 newPosition = gameField2D.ScreenPointToGameField2D(InputController.PrimaryPosition());
                 
-                _currentBlade.transform.position = newPosition;
+                currentBlade.transform.position = newPosition;
                 
                 IsCut(newPosition);
                 
-                _previousPosition = newPosition;
+                previousPosition = newPosition;
                 
                 yield return null;
             }
@@ -59,22 +59,22 @@ namespace Components
         private void TouchEnd(Vector2 point)
         {
             const float delayDestroyBlade = 0.2f;
-            Destroy(_currentBlade, delayDestroyBlade);
+            Destroy(currentBlade, delayDestroyBlade);
             
             StopCoroutine(nameof(BladeTrail));
         }
 
         private void IsCut(Vector2 position)
         {
-            var velocity = (position - _previousPosition).magnitude * Time.deltaTime;
+            var velocity = (position - previousPosition).magnitude * Time.deltaTime;
 
             if (velocity < minVelocity)
             {
-                _currentBladeCollider.enabled = false;
+                currentBladeCollider.enabled = false;
                 return;
             }
             
-            _currentBladeCollider.enabled = true;
+            currentBladeCollider.enabled = true;
         }
     }
 }

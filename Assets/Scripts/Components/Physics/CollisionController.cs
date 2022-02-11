@@ -13,21 +13,21 @@ namespace Components.Physics
     {
         public static CollisionController Instance;
     
-        private List<BaseCollider> _triggers;
-        private List<BaseCollider> _colliders;
+        private List<BaseCollider> triggers;
+        private List<BaseCollider> colliders;
         
-        private Queue<BaseCollider> _addedColliderQueue;
-        private Queue<BaseCollider> _removedColliderQueue;
+        private Queue<BaseCollider> addedColliderQueue;
+        private Queue<BaseCollider> removedColliderQueue;
 
         private void Awake()
         {
             Instance = this;
             
-            _triggers = new List<BaseCollider>();
-            _colliders = new List<BaseCollider>();
+            triggers = new List<BaseCollider>();
+            colliders = new List<BaseCollider>();
             
-            _addedColliderQueue = new Queue<BaseCollider>();
-            _removedColliderQueue = new Queue<BaseCollider>();
+            addedColliderQueue = new Queue<BaseCollider>();
+            removedColliderQueue = new Queue<BaseCollider>();
         }
 
         private void FixedUpdate()
@@ -43,9 +43,9 @@ namespace Components.Physics
 
         private void BaseColliderEnterTrigger()
         {
-            foreach (var trigger in _triggers)
+            foreach (var trigger in triggers)
             {
-                foreach (var baseCollider in _colliders)
+                foreach (var baseCollider in colliders)
                 {
                     if (trigger as CircleCollider && baseCollider as CircleCollider &&
                         CircleColliderEnterCircleCollider(baseCollider as CircleCollider, trigger as CircleCollider))
@@ -58,9 +58,9 @@ namespace Components.Physics
 
         private void BaseColliderExitTrigger()
         {
-            foreach (var trigger in _triggers)
+            foreach (var trigger in triggers)
             {
-                foreach (var baseCollider in _colliders)
+                foreach (var baseCollider in colliders)
                 {
                     if (trigger as CollisionSpace2D && baseCollider as CircleCollider &&
                         CircleColliderExitCollisionSpace(baseCollider as CircleCollider, trigger as CollisionSpace2D))
@@ -88,56 +88,56 @@ namespace Components.Physics
 
         private void AddQueue()
         {
-            for(var _ = 0; _ < _addedColliderQueue.Count; _++)
+            for(var _ = 0; _ < addedColliderQueue.Count; _++)
             {
-                var addedCollider = _addedColliderQueue.Dequeue();
+                var addedCollider = addedColliderQueue.Dequeue();
                 
                 if (addedCollider.IsTrigger)
                 {
-                    _triggers.Add(addedCollider);
+                    triggers.Add(addedCollider);
                 }
                 else
                 {
-                    _colliders.Add(addedCollider);
+                    colliders.Add(addedCollider);
                 }
             }
         }
 
         private void RemoveQueue()
         {
-            for (var _ = 0; _ < _removedColliderQueue.Count; _++)
+            for (var _ = 0; _ < removedColliderQueue.Count; _++)
             {
-                var removedCollider = _removedColliderQueue.Dequeue();
+                var removedCollider = removedColliderQueue.Dequeue();
                 
                 if (removedCollider.IsTrigger)
                 {
-                    _triggers.Remove(removedCollider);
+                    triggers.Remove(removedCollider);
                 }
                 else
                 {
-                    _colliders.Remove(removedCollider);
+                    colliders.Remove(removedCollider);
                 }
             }
         }
         
         public void AddCollider(BaseCollider baseCollider)
         {
-            if (_addedColliderQueue.Contains(baseCollider))
+            if (addedColliderQueue.Contains(baseCollider))
             {
                 return;
             }
             
-            _addedColliderQueue.Enqueue(baseCollider);
+            addedColliderQueue.Enqueue(baseCollider);
         }
 
         public void RemoveCollider(BaseCollider baseCollider)
         {
-            if (_removedColliderQueue.Contains(baseCollider))
+            if (removedColliderQueue.Contains(baseCollider))
             {
                 return;
             }
             
-            _removedColliderQueue.Enqueue(baseCollider);
+            removedColliderQueue.Enqueue(baseCollider);
         }
     }
 }

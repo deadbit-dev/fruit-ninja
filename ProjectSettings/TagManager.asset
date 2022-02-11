@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Splatter
+  - name: Splatters
     uniqueID: 2843597603
+    locked: 0
+  - name: Fruits
+    uniqueID: 4003768733
     locked: 0

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Components
 {
@@ -8,43 +7,34 @@ namespace Components
     {
         public event Action<Vector2> StartTouch;
         public event Action<Vector2> EndTouch;
-        
-        private Controls _controls;
 
-        private void Awake()
+        private void Update()
         {
-            _controls = new Controls();
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartTouchPrimary();
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                EndTouchPrimary();
+            }
         }
 
-        private void OnEnable()
+        private void StartTouchPrimary()
         {
-            _controls.Enable();
+            StartTouch?.Invoke(Input.mousePosition);
         }
 
-        private void OnDisable()
-        {
-           _controls.Disable(); 
-        }
-
-        private void Start()
-        {
-            _controls.Touch.PrimaryContact.started += StartTouchPrimary;
-            _controls.Touch.PrimaryContact.canceled += EndTouchPrimary;
-        }
-
-        private void StartTouchPrimary(InputAction.CallbackContext context)
-        {
-            StartTouch?.Invoke(_controls.Touch.PrimaryPosition.ReadValue<Vector2>());
-        }
-
-        private void EndTouchPrimary(InputAction.CallbackContext context)
+        private void EndTouchPrimary()
         { 
-            EndTouch?.Invoke(_controls.Touch.PrimaryPosition.ReadValue<Vector2>());
+            EndTouch?.Invoke(Input.mousePosition);
         }
 
-        public Vector2 PrimaryPosition()
+        public static Vector2 PrimaryPosition()
         {
-            return _controls.Touch.PrimaryPosition.ReadValue<Vector2>();
+            
+            return Input.mousePosition;
         }
     }
 }
