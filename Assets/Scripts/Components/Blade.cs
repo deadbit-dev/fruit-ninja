@@ -25,6 +25,7 @@ namespace Components
                 return;
             }
             
+            SliceController.Instance.SliceUnit(info.Collider.gameObject);
             SplatterController.Instance.InstanceSplatter(info.Collider.transform.position, Color.white);
            
             Destroy(info.Collider.gameObject);

@@ -15,7 +15,14 @@ namespace Components
         private GameObject currentBlade;
         private BaseCollider currentBladeCollider;
         private Vector2 previousPosition;
-        
+
+        private void Start()
+        {
+            currentBlade = Instantiate(bladePrefab, gameField2D.transform);
+            currentBladeCollider = currentBlade.GetComponent<BaseCollider>();
+            currentBladeCollider.enabled = false;
+        }
+
         private void OnEnable()
         {
             inputController.StartTouch += TouchStart;
@@ -30,9 +37,6 @@ namespace Components
 
         private void TouchStart(Vector2 point)
         {
-            currentBlade = Instantiate(bladePrefab, gameField2D.transform);
-
-            currentBladeCollider = currentBlade.GetComponent<BaseCollider>();
             currentBladeCollider.enabled = false;
             
             previousPosition = gameField2D.ScreenPointToGameField2D(point);
@@ -48,7 +52,7 @@ namespace Components
                 
                 currentBlade.transform.position = newPosition;
                 
-                IsCut(newPosition);
+                IsSlice(newPosition);
                 
                 previousPosition = newPosition;
                 
@@ -58,13 +62,12 @@ namespace Components
 
         private void TouchEnd(Vector2 point)
         {
-            const float delayDestroyBlade = 0.2f;
-            Destroy(currentBlade, delayDestroyBlade);
+            currentBladeCollider.enabled = false; 
             
             StopCoroutine(nameof(BladeTrail));
         }
 
-        private void IsCut(Vector2 position)
+        private void IsSlice(Vector2 position)
         {
             var velocity = (position - previousPosition).magnitude * Time.deltaTime;
 
