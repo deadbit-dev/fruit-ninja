@@ -7,6 +7,7 @@ namespace Components
     {
         public static SplatterController Instance;
 
+        [SerializeField] private GameField2D gameField2D;
         [SerializeField] private GameObject splatterPrefab;
         [SerializeField] private Sprite[] splatterSprites;
 
@@ -36,7 +37,12 @@ namespace Components
         
         public void InstanceSplatter(Vector3 position, Color color)
         {
-            var splatter = Instantiate(splatterPrefab, position, Quaternion.Euler(new Vector3(0, 0, Random.Range(0f, 360f))));
+            var splatter = Instantiate(
+                splatterPrefab, 
+                position, 
+                Quaternion.Euler(new Vector3(0, 0, Random.Range(0f, 360f))), 
+                gameField2D.transform);
+            
             var spriteRenderer = splatter.GetComponent<SpriteRenderer>();
             
             spriteRenderer.sprite = splatterSprites[Random.Range(0, splatterSprites.Length)];
