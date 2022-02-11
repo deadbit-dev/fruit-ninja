@@ -33,7 +33,6 @@ namespace Components
 
         public static Vector2 PrimaryPosition()
         {
-            
             return Input.mousePosition;
         }
     }
