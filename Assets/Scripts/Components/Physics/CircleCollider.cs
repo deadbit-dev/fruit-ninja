@@ -12,27 +12,7 @@ namespace Components.Physics
 
         public Vector2 Center => position;
         public float Radius => radius;
-
-        private void Start()
-        {
-            CollisionController.Instance.AddCollider(this); 
-        }
-
-        private void OnEnable()
-        {
-            CollisionController.Instance.AddCollider(this); 
-        }
-
-        private void OnDisable() 
-        {
-            CollisionController.Instance.RemoveCollider(this); 
-        }
-
-        private void OnDestroy()
-        {
-            CollisionController.Instance.RemoveCollider(this); 
-        }
-        
+     
         private void FixedUpdate()
         {
             position = transform.position + (Vector3) offset;

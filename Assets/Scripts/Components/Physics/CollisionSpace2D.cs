@@ -25,26 +25,6 @@ namespace Components.Physics
             set => extent = value / 2;
         }
 
-        private void Start()
-        {
-            CollisionController.Instance.AddCollider(this);
-        }
-
-        private void OnEnable()
-        {
-            CollisionController.Instance.AddCollider(this);
-        }
-
-        private void OnDisable() 
-        {
-            CollisionController.Instance.RemoveCollider(this);
-        }
-
-        private void OnDestroy()
-        {
-            CollisionController.Instance.RemoveCollider(this);
-        }
- 
 #if UNITY_EDITOR        
         private void OnDrawGizmosSelected()
         {
