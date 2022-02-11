@@ -4,10 +4,10 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 8531463970534289752
-    second: ON9NZH0_0
+    second: splatter_0
   - first:
       213: -560348884204696141
-    second: ON9NZH0_1
+    second: splatter_1
   - first:
       213: 3390764194028334990
     second: ON9NZH0_8
@@ -112,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ON9NZH0_0
+      name: splatter_0
       rect:
         serializedVersion: 2
         x: 40
@@ -133,7 +133,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ON9NZH0_1
+      name: splatter_1
       rect:
         serializedVersion: 2
         x: 417
