@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 219742923}
   - component: {fileID: 219742922}
   - component: {fileID: 219742924}
+  - component: {fileID: 219742926}
   - component: {fileID: 219742925}
   m_Layer: 0
   m_Name: Controllers
@@ -336,12 +337,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333ba8dec22d443c962bd50a121dc688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameField2D: {fileID: 1624889134}
   splatterPrefab: {fileID: 3555477366350049089, guid: 67b12fa9f6e048a4aa3ac13be95aca5b, type: 3}
   splatterSprites:
   - {fileID: 8531463970534289752, guid: 01186c33ca3b01c4b9100ecc883359e7, type: 3}
   - {fileID: -560348884204696141, guid: 01186c33ca3b01c4b9100ecc883359e7, type: 3}
   deltaAlphaFade: 0.01
   deltaTimeFade: 0.05
+--- !u!114 &219742926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219742919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d483274f134b70b65136fa0337f8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &322334067
 GameObject:
   m_ObjectHideFlags: 0
