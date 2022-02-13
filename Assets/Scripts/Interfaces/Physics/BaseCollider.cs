@@ -1,6 +1,6 @@
 using System;
-using Components.Physics;
 using UnityEngine;
+using Controllers;
 
 namespace Interfaces.Physics
 {
@@ -12,26 +12,21 @@ namespace Interfaces.Physics
         public event Action<ICollision> CollisionEnter;
         public event Action<ICollision> CollisionExit;
         
-        private void Start()
+        private void Awake()
         {
-            CollisionController.Instance.AddCollider(this); 
+            PhysicsController.Instance.AddCollider(this); 
         }
 
         private void OnEnable()
         {
-            CollisionController.Instance.AddCollider(this); 
+            PhysicsController.Instance.AddCollider(this); 
         }
 
         private void OnDisable() 
         {
-            CollisionController.Instance.RemoveCollider(this); 
+            PhysicsController.Instance.RemoveCollider(this); 
         }
-
-        private void OnDestroy()
-        {
-            CollisionController.Instance.RemoveCollider(this); 
-        }
-
+        
         public void CollisionEnterEvent(ICollision info)
         {
             CollisionEnter?.Invoke(info);

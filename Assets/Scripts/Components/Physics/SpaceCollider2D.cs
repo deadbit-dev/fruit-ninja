@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 using Interfaces.Physics;
 
 namespace Components.Physics
 {
-    public class CollisionSpace2D : BaseCollider
+    public class SpaceCollider2D : BaseCollider
     {
         [SerializeField] private Vector2 offset;
         [SerializeField] private Vector2 extent;
@@ -24,7 +23,7 @@ namespace Components.Physics
             get => Max - Min;
             set => extent = value / 2;
         }
-
+  
 #if UNITY_EDITOR        
         private void OnDrawGizmosSelected()
         {

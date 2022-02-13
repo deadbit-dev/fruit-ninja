@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Components.Utils
+namespace Utils
 {
     [Serializable]
     public struct ViewportPoint

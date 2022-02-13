@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using Components;
 
-namespace Components
+namespace Controllers
 {
     public class SplatterController : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 using System.Collections;
-using ScriptableObjects;
 using UnityEngine;
+using Components;
+using ScriptableObjects;
 
-namespace Components 
+namespace Controllers 
 {
     public class SpawnController : MonoBehaviour
     {

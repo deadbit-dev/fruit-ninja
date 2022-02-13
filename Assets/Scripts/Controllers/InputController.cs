@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Components
+namespace Controllers
 {
     public class InputController : MonoBehaviour
     {

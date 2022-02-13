@@ -1,9 +1,13 @@
+using Interfaces.Physics;
 using UnityEngine;
 
 namespace Components.Physics
 {
+    [RequireComponent(typeof(BaseCollider))]
     public class PhysicsUnit : MonoBehaviour
     {
+        [SerializeField] private BaseCollider body;
+        [Space]
         [SerializeField] private bool simulate;
         [Space] 
         [SerializeField] private float mass;
@@ -11,12 +15,23 @@ namespace Components.Physics
         [SerializeField] private Vector3 velocity;
         [SerializeField] private Vector3 torque;
 
-        
         private const float Gravity = 9.8f;
+        
+        public float Mass
+        {
+            get => mass;
+            set => mass = value;
+        }
+
+        public Vector3 Velocity => velocity;
 
         private void FixedUpdate()
         {
-            if (!simulate) return;
+            if (!simulate)
+            {
+                return;
+            }
+            
             Simulate();
             Torque();
         }

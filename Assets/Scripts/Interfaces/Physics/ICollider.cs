@@ -3,8 +3,11 @@ using System;
 namespace Interfaces.Physics
 {
     public interface ICollider
-    { 
-        event Action<ICollision> CollisionExit;
-        void CollisionExitEvent(ICollision info);
+    {
+        abstract event Action<ICollision> CollisionEnter;
+        abstract event Action<ICollision> CollisionExit;
+        
+        abstract void CollisionEnterEvent(ICollision info);
+        abstract void CollisionExitEvent(ICollision info);
     }
 }

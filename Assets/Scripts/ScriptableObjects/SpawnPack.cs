@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Components.Physics;
 using UnityEngine;
+using Components.Physics;
 
 namespace ScriptableObjects
 {

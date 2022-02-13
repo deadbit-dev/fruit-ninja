@@ -1,8 +1,9 @@
 using System.Collections;
-using Interfaces.Physics;
 using UnityEngine;
+using Interfaces.Physics;
+using Components;
 
-namespace Components
+namespace Controllers
 {
     public class BladeController : MonoBehaviour
     {
@@ -12,15 +13,17 @@ namespace Components
         [Space]
         [SerializeField] private float minVelocity;
 
-        private GameObject currentBlade;
-        private BaseCollider currentBladeCollider;
+        private GameObject bladeObject;
+        private Blade bladeScript;
+        private TrailRenderer currentBladeTrail;
         private Vector2 previousPosition;
 
         private void Start()
         {
-            currentBlade = Instantiate(bladePrefab, gameField2D.transform);
-            currentBladeCollider = currentBlade.GetComponent<BaseCollider>();
-            currentBladeCollider.enabled = false;
+            bladeObject = Instantiate(bladePrefab, gameField2D.transform);
+            bladeScript = bladeObject.GetComponent<Blade>();
+            currentBladeTrail = bladeObject.GetComponent<TrailRenderer>();
+            bladeScript.enabled = false;
         }
 
         private void OnEnable()
@@ -37,9 +40,8 @@ namespace Components
 
         private void TouchStart(Vector2 point)
         {
-            currentBladeCollider.enabled = false;
-            
             previousPosition = gameField2D.ScreenPointToGameField2D(point);
+            currentBladeTrail.enabled = true;
             
             StartCoroutine(nameof(BladeTrail));
         }
@@ -50,7 +52,7 @@ namespace Components
             {
                 Vector2 newPosition = gameField2D.ScreenPointToGameField2D(InputController.PrimaryPosition());
                 
-                currentBlade.transform.position = newPosition;
+                bladeObject.transform.position = newPosition;
                 
                 IsSlice(newPosition);
                 
@@ -62,7 +64,8 @@ namespace Components
 
         private void TouchEnd(Vector2 point)
         {
-            currentBladeCollider.enabled = false; 
+            bladeScript.enabled = false;
+            currentBladeTrail.enabled = false; 
             
             StopCoroutine(nameof(BladeTrail));
         }
@@ -73,11 +76,11 @@ namespace Components
 
             if (velocity < minVelocity)
             {
-                currentBladeCollider.enabled = false;
+                bladeScript.enabled = false;
                 return;
             }
             
-            currentBladeCollider.enabled = true;
+            bladeScript.enabled = true;
         }
     }
 }

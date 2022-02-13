@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Components.Utils
+namespace Utils
 {
     public static class Random
     {

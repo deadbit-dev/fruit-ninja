@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using Components.Utils;
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace ScriptableObjects

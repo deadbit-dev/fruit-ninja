@@ -1,17 +1,19 @@
 using UnityEngine;
-using Components.Physics;
-using Components.Utils;
+using Utils;
 using Interfaces.Physics;
+using Components.Physics;
 
 namespace Components
 {
     public class GameField2D : MonoBehaviour
     {
-        [SerializeField] private CollisionSpace2D collisionSpace2D;
-        [Space]
         [SerializeField] private Camera screenSpace;
         [Space]
         [SerializeField] private ViewportField viewportField;
+        [Space]
+        [SerializeField] private SpaceCollider2D spaceCollider2D;
+        [Space] 
+        [SerializeField] private Vector3 increaseSizeCollisionSpace2D;
 
         private void Awake()
         {
@@ -20,12 +22,12 @@ namespace Components
 
         private void OnEnable()
         {
-            collisionSpace2D.CollisionExit += CollisionExit;
+            spaceCollider2D.CollisionExit += CollisionExit;
         }
 
         private void OnDisable()
         {
-            collisionSpace2D.CollisionExit -= CollisionExit;
+            spaceCollider2D.CollisionExit -= CollisionExit;
         }
 
         private static void CollisionExit(ICollision info)
@@ -34,17 +36,18 @@ namespace Components
             {
                 return;
             }
-            
+
             Destroy(info.Collider.gameObject);
         }
 
         private void SetSizeCollisionSpace2D()
         {
-            collisionSpace2D.Offset = (Vector2) screenSpace.ViewportToWorldPoint((Vector2) viewportField.Center) -
-                                      (collisionSpace2D.Center - collisionSpace2D.Offset);
-            
-            collisionSpace2D.Size = screenSpace.ViewportToWorldPoint((Vector2) viewportField.Max) - 
-                                    screenSpace.ViewportToWorldPoint((Vector2) viewportField.Min);
+            spaceCollider2D.Offset = (Vector2) screenSpace.ViewportToWorldPoint((Vector2) viewportField.Center) -
+                                      (spaceCollider2D.Center - spaceCollider2D.Offset);
+
+            spaceCollider2D.Size = screenSpace.ViewportToWorldPoint((Vector2) viewportField.Max) - 
+                                    screenSpace.ViewportToWorldPoint((Vector2) viewportField.Min) +
+                                    increaseSizeCollisionSpace2D;
         }
 
         public Vector3 ViewportPointToGameField2D(ViewportPoint viewportPoint)
@@ -69,7 +72,7 @@ namespace Components
 #if UNITY_EDITOR        
         private void OnDrawGizmosSelected()
         {
-            if (collisionSpace2D == null || screenSpace == null)
+            if (spaceCollider2D == null || screenSpace == null)
             {
                 return;
             }
