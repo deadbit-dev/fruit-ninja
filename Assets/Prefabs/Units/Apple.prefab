@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 688841759913728875}
   - component: {fileID: 398078371017961954}
   - component: {fileID: 8149739458007504070}
-  - component: {fileID: -5459963849953062275}
   m_Layer: 0
   m_Name: Apple
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: -291198563
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6692323874898053503, guid: 36acecae16365794cbf3b7372d21533a, type: 3}
+  m_Sprite: {fileID: 7207882119082248946, guid: 36acecae16365794cbf3b7372d21533a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.66, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -112,22 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3dc8f4151f4c23b85cc5917b94200f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 398078371017961954}
   simulate: 1
   mass: 0.035
   axisGravity: {x: 0, y: 1, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   torque: {x: 0, y: 0, z: 0}
---- !u!114 &-5459963849953062275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026604174447914698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b18d867cf149b089d0e693d4837ad0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  circleCollider: {fileID: 398078371017961954}
-  physics: {fileID: 8149739458007504070}
