@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8145647012374914239}
-  - component: {fileID: 9117343451869502430}
   - component: {fileID: 8145647012374914238}
+  - component: {fileID: 7997176575798017739}
   - component: {fileID: -7543395811692922233}
   m_Layer: 0
   m_Name: Blade
@@ -33,22 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9117343451869502430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8145647012374914237}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e36587751d4572a50f0f48099d314f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTrigger: 1
-  offset: {x: 0, y: 0}
-  radius: 0.3
-  collisionController: {fileID: 0}
 --- !u!96 &8145647012374914238
 TrailRenderer:
   serializedVersion: 2
@@ -156,6 +140,21 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &7997176575798017739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145647012374914237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e36587751d4572a50f0f48099d314f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrigger: 1
+  offset: {x: 0, y: 0}
+  radius: 0.5
 --- !u!114 &-7543395811692922233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,4 +167,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4355cb3741342fdad31828ee84fc996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleCollider: {fileID: 9117343451869502430}
+  bladeCollider: {fileID: 7997176575798017739}
+  partUnitPrefab: {fileID: 9175702825001703711, guid: 989b902c71ab3b94598d28da1fa8d6e2, type: 3}

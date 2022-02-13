@@ -1,34 +1,62 @@
-using Components.Physics;
-using Interfaces.Physics;
 using UnityEngine;
+using Utils;
+using Interfaces.Physics;
+using Controllers;
 
 namespace Components
 {
     public class Blade : MonoBehaviour
     {
-        [SerializeField] private CircleCollider circleCollider;
+        [SerializeField] private BaseCollider bladeCollider;
+        [SerializeField] private GameObject partUnitPrefab;
 
         private void OnEnable()
         {
-            circleCollider.CollisionEnter += CollisionEnter;
+            bladeCollider.CollisionEnter += CollisionEnter;
         }
 
         private void OnDisable()
         {
-            circleCollider.CollisionEnter -= CollisionEnter;
+            bladeCollider.CollisionEnter -= CollisionEnter;
         }
 
-        private static void CollisionEnter(ICollision info)
+        private void CollisionEnter(ICollision info)
         {
-            if (info.Collider == null)
+            if (info.Collider == null || !info.Collider.gameObject.CompareTag("Unit"))
             {
                 return;
             }
-            
-            SliceController.Instance.SliceUnit(info.Collider.gameObject);
-            SplatterController.Instance.InstanceSplatter(info.Collider.transform.position, Color.white);
            
-            Destroy(info.Collider.gameObject);
+            Slice(info.Collider.gameObject);
+        }
+
+        private void Slice(GameObject unit)
+        {
+             var unitTransform = unit.transform;
+             var unitPosition = unitTransform.position;
+             var unitRotation = unitTransform.rotation;
+             var unitLocalScale = unitTransform.localScale;
+             var sliceSprite = unit.GetComponent<SpriteRenderer>().sprite;
+             
+             // TODO: direction
+             var sliceDirection = new Vector2();
+ 
+             var (spriteA, spriteB) = RuntimeSpriteEditor.SliceSprite(sliceSprite, sliceDirection);
+ 
+             var partA = Instantiate(partUnitPrefab, unitPosition, unitRotation);
+             partA.transform.localScale = unitLocalScale;
+             partA.GetComponent<SpriteRenderer>().sprite = spriteA;
+             
+             var partB = Instantiate(partUnitPrefab, unitPosition, unitRotation);
+             partB.transform.localScale = unitLocalScale;
+             partB.GetComponent<SpriteRenderer>().sprite = spriteB;
+             
+             SplatterController.Instance.InstanceSplatter(unitPosition, Color.white);
+             
+             Destroy(unit);
+             
+             // TODO: velocity for partA and partB by direction           
+             
         }
     }
 }
