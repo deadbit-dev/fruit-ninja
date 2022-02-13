@@ -38,7 +38,7 @@ namespace Components.Physics
 
         private void Simulate()
         {
-            velocity -= axisGravity * (Gravity * mass);
+            velocity -= axisGravity * (Gravity * mass) * Time.fixedDeltaTime;
             transform.position += velocity * Time.fixedDeltaTime;
         }
 
