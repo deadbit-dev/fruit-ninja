@@ -114,6 +114,6 @@ MonoBehaviour:
   body: {fileID: 6101431553714032440}
   simulate: 1
   mass: 1.7
-  axisGravity: {x: 0, y: 1, z: 0}
+  axisGravity: {x: 0, y: -1, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   torque: {x: 0, y: 0, z: 0}
