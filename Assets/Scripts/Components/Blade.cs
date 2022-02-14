@@ -36,24 +36,28 @@ namespace Components
             var unitPosition = unitTransform.position;
             var unitRotation = unitTransform.rotation;
             var unitLocalScale = unitTransform.localScale;
+            var parentUnit = unitTransform.parent;
             var sliceSprite = unit.GetComponent<SpriteRenderer>().sprite;
 
             var contactSliceUV = RuntimeSpriteEditor.WorldPointToSpriteUV(sliceSprite, contactSlice, unitTransform);
             var spritePivotUV = RuntimeSpriteEditor.SpritePivotUV(sliceSprite);
 
-            // TODO: sliceSecant by contactSliceUV and spritePivotUV
-            var sliceSecant = new Vector2();
+            var sliceDirection = (contactSliceUV - spritePivotUV).normalized;
 
-            var (spriteA, spriteB) = RuntimeSpriteEditor.SpriteSlice(sliceSprite, sliceSecant);
+            var (spriteA, spriteB) = RuntimeSpriteEditor.SpriteSliceByPivot(sliceSprite, sliceDirection);
  
-            var partA = Instantiate(partUnitPrefab, unitPosition, unitRotation);
+            var partA = Instantiate(partUnitPrefab, parentUnit);
+            partA.transform.position = unitPosition;
+            partA.transform.rotation = unitRotation;
             partA.transform.localScale = unitLocalScale;
             partA.GetComponent<SpriteRenderer>().sprite = spriteA;
             
-            var partB = Instantiate(partUnitPrefab, unitPosition, unitRotation);
+            var partB = Instantiate(partUnitPrefab, parentUnit);
+            partB.transform.position = unitPosition;
+            partB.transform.rotation = unitRotation;
             partB.transform.localScale = unitLocalScale;
             partB.GetComponent<SpriteRenderer>().sprite = spriteB;
-             
+
             SplatterController.Instance.InstanceSplatter(unitPosition, Color.white);
                          
             Destroy(unit);
