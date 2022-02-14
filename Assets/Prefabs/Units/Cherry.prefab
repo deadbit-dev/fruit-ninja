@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9138913317329865122}
   - component: {fileID: 8276194416371098411}
   - component: {fileID: 451767372786812431}
+  - component: {fileID: 3963908167383382990}
   m_Layer: 0
   m_Name: Cherry
   m_TagString: Unit
@@ -117,3 +118,15 @@ MonoBehaviour:
   axisGravity: {x: 0, y: -1, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   torque: {x: 0, y: 0, z: 0}
+--- !u!114 &3963908167383382990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7729092930809297923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fd05566081491fb91cd1233aa99b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 688841759913728875}
   - component: {fileID: 398078371017961954}
   - component: {fileID: 8149739458007504070}
+  - component: {fileID: -5527049323396679616}
   m_Layer: 0
   m_Name: Strawberry
   m_TagString: Unit
@@ -117,3 +118,15 @@ MonoBehaviour:
   axisGravity: {x: 0, y: -1, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   torque: {x: 0, y: 0, z: 0}
+--- !u!114 &-5527049323396679616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026604174447914698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fd05566081491fb91cd1233aa99b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
