@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using Interfaces.Physics;
 using Components;
 
 namespace Controllers
@@ -11,18 +10,18 @@ namespace Controllers
         [SerializeField] private GameField2D gameField2D;
         [SerializeField] private GameObject bladePrefab;
         [Space]
-        [SerializeField] private float minVelocity;
+        [SerializeField] private float minSpeed;
 
         private GameObject bladeObject;
+        private TrailRenderer bladeTrail;
         private Blade bladeScript;
-        private TrailRenderer currentBladeTrail;
         private Vector2 previousPosition;
 
         private void Start()
         {
             bladeObject = Instantiate(bladePrefab, gameField2D.transform);
+            bladeTrail = bladeObject.GetComponent<TrailRenderer>();
             bladeScript = bladeObject.GetComponent<Blade>();
-            currentBladeTrail = bladeObject.GetComponent<TrailRenderer>();
             bladeScript.enabled = false;
         }
 
@@ -41,7 +40,7 @@ namespace Controllers
         private void TouchStart(Vector2 point)
         {
             previousPosition = gameField2D.ScreenPointToGameField2D(point);
-            currentBladeTrail.enabled = true;
+            bladeTrail.enabled = true;
             
             StartCoroutine(nameof(BladeTrail));
         }
@@ -51,7 +50,7 @@ namespace Controllers
             while (true)
             {
                 Vector2 newPosition = gameField2D.ScreenPointToGameField2D(InputController.PrimaryPosition());
-                
+               
                 bladeObject.transform.position = newPosition;
                 
                 IsSlice(newPosition);
@@ -65,16 +64,16 @@ namespace Controllers
         private void TouchEnd(Vector2 point)
         {
             bladeScript.enabled = false;
-            currentBladeTrail.enabled = false; 
+            bladeTrail.enabled = false; 
             
             StopCoroutine(nameof(BladeTrail));
         }
 
         private void IsSlice(Vector2 position)
         {
-            var velocity = (position - previousPosition).magnitude * Time.deltaTime;
+            var speed = (position - previousPosition).magnitude * Time.deltaTime;
 
-            if (velocity < minVelocity)
+            if (speed < minSpeed)
             {
                 bladeScript.enabled = false;
                 return;
