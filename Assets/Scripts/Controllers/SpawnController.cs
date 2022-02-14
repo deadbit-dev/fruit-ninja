@@ -31,7 +31,7 @@ namespace Controllers
             { 
                 yield return new WaitForSeconds(interval);
                 
-                var spawnZone = settings.SpawnZones[Utils.Random.RandomRangeWeight(settings.Priorities)];
+                var spawnZone = settings.SpawnZones[Utils.Math.RandomRangeWeight(settings.Priorities)];
                 
                 StartCoroutine(SpawnUnitWithDelay(
                     spawnZone,
@@ -48,7 +48,7 @@ namespace Controllers
                 var weight = Random.value;
 
                 var unit = Instantiate(
-                    settings.SpawnPack.UnitTypes[Utils.Random.RandomRangeWeight(settings.SpawnPack.Priorities)],
+                    settings.SpawnPack.UnitTypes[Utils.Math.RandomRangeWeight(settings.SpawnPack.Priorities)],
                     Vector3.Lerp(pointA, pointB, weight), Quaternion.identity, gameField2D.transform);
 
                 unit.AddForce2D(
