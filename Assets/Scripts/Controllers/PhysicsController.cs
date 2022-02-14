@@ -8,6 +8,7 @@ namespace Controllers
     public struct CollisionInfo : ICollision
     {
         public BaseCollider Collider { get; set; }
+        public Vector3 ContactPosition { get; set; }
     }
 
     public class PhysicsController : MonoBehaviour
@@ -63,7 +64,11 @@ namespace Controllers
                     if (trigger.Key is CircleCollider && baseCollider is CircleCollider &&
                         CircleColliderInsideCircleCollider(baseCollider as CircleCollider, trigger.Key as CircleCollider))
                     {
-                        trigger.Key.CollisionEnterEvent(new CollisionInfo {Collider = baseCollider});
+                        trigger.Key.CollisionEnterEvent(new CollisionInfo
+                        {
+                            Collider = baseCollider,
+                            ContactPosition = ContactPositionWithCircleCollider(((CircleCollider) trigger.Key).Center, baseCollider as CircleCollider)
+                        });
                         
                         trigger.Value.Add(baseCollider);
                     }
@@ -111,11 +116,16 @@ namespace Controllers
                    circleCollider.Center.y - circleCollider.Radius < spaceCollider2D.Max.y &&
                    circleCollider.Center.y + circleCollider.Radius > spaceCollider2D.Min.y;
         }
-
+        
         private static bool CircleColliderInsideCircleCollider(CircleCollider circleColliderA,
             CircleCollider circleColliderB)
         {
             return Vector2.Distance(circleColliderA.Center, circleColliderB.Center) < (circleColliderA.Radius + circleColliderB.Radius);
+        }
+
+        private static Vector3 ContactPositionWithCircleCollider(Vector2 centerOtherCollider, CircleCollider circleCollider)
+        {
+            return (centerOtherCollider - circleCollider.Center).normalized * circleCollider.Radius + circleCollider.Center;
         }
         
         private void AddQueue()
