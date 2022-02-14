@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fe7c9097ec14b26b99198451029626d, type: 3}
-  m_Name: SpawnController
+  m_Name: SpawnSettings
   m_EditorClassIdentifier: 
   duration: 100
   spawnCurve:

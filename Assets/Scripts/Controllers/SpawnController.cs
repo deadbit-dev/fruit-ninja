@@ -7,7 +7,7 @@ namespace Controllers
 {
     public class SpawnController : MonoBehaviour
     {
-        [SerializeField] private ScriptableObjects.SpawnController settings;
+        [SerializeField] private ScriptableObjects.SpawnSettings settings;
         [SerializeField] private GameField2D gameField2D;
 
         private void Start()
