@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "SpawnController", menuName = "Spawn Controller", order = 0)]
-    public class SpawnController: ScriptableObject
+    [CreateAssetMenu(fileName = "SpawnSettings", menuName = "Spawn Settings", order = 0)]
+    public class SpawnSettings: ScriptableObject
     {
         [SerializeField] private float duration;
         [Space]
