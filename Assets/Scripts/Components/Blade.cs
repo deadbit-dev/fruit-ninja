@@ -35,7 +35,7 @@ namespace Components
             var unitTransform = unit.transform;
             var unitPosition = unitTransform.position;
             var unitRotation = unitTransform.rotation;
-            var unitLocalScale = unitTransform.localScale;
+            var unitLocalScale = unitTransform.lossyScale;
             var parentUnit = unitTransform.parent;
             var sliceSprite = unit.GetComponent<SpriteRenderer>().sprite;
 
@@ -47,13 +47,13 @@ namespace Components
             var (spriteA, spriteB) = RuntimeSpriteEditor.SpriteSliceByPivot(sliceSprite, sliceDirection);
  
             var partA = Instantiate(partUnitPrefab, parentUnit);
-            partA.transform.position = unitPosition;
+            partA.GetComponent<Transform>().position = unitPosition;
             partA.transform.rotation = unitRotation;
             partA.transform.localScale = unitLocalScale;
             partA.GetComponent<SpriteRenderer>().sprite = spriteA;
             
             var partB = Instantiate(partUnitPrefab, parentUnit);
-            partB.transform.position = unitPosition;
+            partB.GetComponent<Transform>().position = unitPosition;
             partB.transform.rotation = unitRotation;
             partB.transform.localScale = unitLocalScale;
             partB.GetComponent<SpriteRenderer>().sprite = spriteB;
