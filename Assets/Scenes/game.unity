@@ -323,7 +323,7 @@ MonoBehaviour:
   inputController: {fileID: 219742923}
   gameField2D: {fileID: 1624889134}
   bladePrefab: {fileID: 8145647012374914237, guid: 45b620ee10247f0479c5ca37a7dee493, type: 3}
-  minVelocity: 0.0005
+  minSpeed: 0.0005
 --- !u!114 &219742925
 MonoBehaviour:
   m_ObjectHideFlags: 0
