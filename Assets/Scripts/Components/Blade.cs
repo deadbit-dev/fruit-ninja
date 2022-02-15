@@ -58,7 +58,7 @@ namespace Components
             partB.transform.localScale = unitLocalScale;
             partB.GetComponent<SpriteRenderer>().sprite = spriteB;
 
-            SplatterController.Instance.InstanceSplatter(unitPosition, Color.white);
+            EffectController.Instance.InstanceSplatter(unitPosition, Color.white);
                          
             Destroy(unit);
                          

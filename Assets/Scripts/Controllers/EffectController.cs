@@ -4,9 +4,9 @@ using Components;
 
 namespace Controllers
 {
-    public class SplatterController : MonoBehaviour
+    public class EffectController : MonoBehaviour
     {
-        public static SplatterController Instance;
+        public static EffectController Instance;
 
         [SerializeField] private GameField2D gameField2D;
         [SerializeField] private GameObject splatterPrefab;
