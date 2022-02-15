@@ -28,6 +28,8 @@ namespace Components
             }
            
             Slice(info.Collider.gameObject, info.ContactPosition);
+            
+            ScoreController.Instance.SetScore(info.Collider.gameObject.GetComponent<Score>());
         }
 
         private void Slice(GameObject unit, Vector3 contactSlice)
@@ -62,7 +64,7 @@ namespace Components
                          
             Destroy(unit);
                          
-            // TODO: velocity for partA and partB by sliceSecant
+            // TODO: velocity for partA and partB by sliceDirection
         }
     }
 }
