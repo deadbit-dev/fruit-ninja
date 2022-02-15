@@ -6,9 +6,9 @@ namespace ScriptableObjects
     public class HealthSettings : ScriptableObject
     {
         [SerializeField] private int countHeart;
-        [SerializeField] private int damageHeart;
+        [SerializeField] private int damageHeartCount;
         
         public int CountHeart => countHeart;
-        public int DamageHeart => damageHeart;
+        public int DamageHeartCount => damageHeartCount;
     }
 }

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18272e51434c45de882628baba888fed, type: 3}
   m_Name: HealthSettings
   m_EditorClassIdentifier: 
+  countHeart: 5
+  damageHeartCount: 1
