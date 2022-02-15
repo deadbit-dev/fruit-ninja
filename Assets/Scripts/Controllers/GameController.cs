@@ -5,21 +5,37 @@ namespace Controllers
 {
     public class GameController : MonoBehaviour
     {
-        public static GameController Instance;
+        private static GameController _instance;
         
         [SerializeField] private GameSettings settings;
-
+        
         private void Awake()
         {
-            if (Instance == null)
-            {
-                DontDestroyOnLoad(gameObject);
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            _instance = this;
+        }
+
+        private void Start()
+        {
+            StartGame();
+        }
+
+        private static void StartGame()
+        {
+            ScoreController.Instance.LoadScore();
+            HealthController.Instance.ZeroHeart += GameOver;
+            SpawnController.Instance.StartSpawn();
+        }
+
+        public static void StopGame()
+        {
+            
+        }
+
+        private static void GameOver()
+        {
+            SpawnController.Instance.StopSpawn();
+            BladeController.Instance.enabled = false;
+            UIController.Instance.GameOver();
         }
     }
 }
