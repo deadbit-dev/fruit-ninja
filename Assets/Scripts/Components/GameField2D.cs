@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using Utils;
 using Interfaces.Physics;
 using Components.Physics;
+using Controllers;
 
 namespace Components
 {
@@ -30,13 +32,18 @@ namespace Components
             spaceCollider2D.CollisionExit -= CollisionExit;
         }
 
-        private static void CollisionExit(ICollision info)
+        private void CollisionExit(ICollision info)
         {
             if (info.Collider == null)
             {
                 return;
             }
 
+            if (info.Collider.gameObject.CompareTag("Unit"))
+            {
+                HealthController.Instance.Damage();
+            }
+            
             Destroy(info.Collider.gameObject);
         }
 
