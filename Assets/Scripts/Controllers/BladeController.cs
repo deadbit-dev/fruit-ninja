@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Components;
@@ -6,6 +7,8 @@ namespace Controllers
 {
     public class BladeController : MonoBehaviour
     {
+        public static BladeController Instance;
+        
         [SerializeField] private InputController inputController;
         [SerializeField] private GameField2D gameField2D;
         [SerializeField] private GameObject bladePrefab;
@@ -16,6 +19,11 @@ namespace Controllers
         private TrailRenderer bladeTrail;
         private Blade bladeScript;
         private Vector2 previousPosition;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {

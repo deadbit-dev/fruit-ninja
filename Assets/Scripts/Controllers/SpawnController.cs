@@ -2,27 +2,22 @@ using System.Collections;
 using UnityEngine;
 using Components;
 using ScriptableObjects;
+using Random = UnityEngine.Random;
 
 namespace Controllers 
 {
     public class SpawnController : MonoBehaviour
     {
-        [SerializeField] private ScriptableObjects.SpawnSettings settings;
+        public static SpawnController Instance;
+        
+        [SerializeField] private SpawnSettings settings;
         [SerializeField] private GameField2D gameField2D;
 
-        private void Start()
+        private Coroutine coroutine;
+        
+        private void Awake()
         {
-            StartSpawn();
-        }
-
-        public void StartSpawn()
-        {
-            StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate(Time.time / settings.Duration)));
-        }
-
-        public void StopSpawn()
-        {
-            StopCoroutine(nameof(SpawnPackWithInterval));
+            Instance = this;
         }
 
         private IEnumerator SpawnPackWithInterval(float interval)
@@ -59,6 +54,16 @@ namespace Controllers
 
                 yield return new WaitForSeconds(delay);
             }
+        }
+        
+        public void StartSpawn()
+        {
+            coroutine = StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate(Time.time / settings.Duration)));
+        }
+         
+        public void StopSpawn()
+        {
+            StopAllCoroutines();
         }
     }   
 }
