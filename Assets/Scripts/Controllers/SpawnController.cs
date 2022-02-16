@@ -13,7 +13,7 @@ namespace Controllers
         [SerializeField] private SpawnSettings settings;
         [SerializeField] private GameField2D gameField2D;
 
-        private Coroutine coroutine;
+        private float spawnStartTime;
         
         private void Awake()
         {
@@ -32,13 +32,13 @@ namespace Controllers
                     spawnZone,
                     gameField2D.ViewportPointToGameField2D(spawnZone.FirstPoint),
                     gameField2D.ViewportPointToGameField2D(spawnZone.SecondPoint),
-                    settings.SpawnPack.DelayCurve.Evaluate(Time.time / settings.Duration)));               
+                    settings.SpawnPack.DelayCurve.Evaluate((Time.time / spawnStartTime) / settings.Duration)));               
             }
         }
 
         private IEnumerator SpawnUnitWithDelay(SpawnZone spawnZone, Vector3 pointA, Vector3 pointB, float delay)
         {
-            for (var i = 0; i < settings.SpawnPack.CountCurve.Evaluate(Time.time / settings.Duration); i++)
+            for (var i = 0; i < settings.SpawnPack.CountCurve.Evaluate((Time.time / spawnStartTime) / settings.Duration); i++)
             {
                 var weight = Random.value;
 
@@ -58,7 +58,8 @@ namespace Controllers
         
         public void StartSpawn()
         {
-            coroutine = StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate(Time.time / settings.Duration)));
+            spawnStartTime = Time.realtimeSinceStartup;
+            StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate((Time.time / spawnStartTime) / settings.Duration)));
         }
          
         public void StopSpawn()
