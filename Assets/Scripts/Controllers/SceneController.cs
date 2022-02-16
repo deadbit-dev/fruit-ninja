@@ -9,18 +9,10 @@ namespace Controllers
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                DontDestroyOnLoad(gameObject);
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
         }
 
-        public void SwitchScene(string sceneName)
+        public static void SwitchScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
         }
