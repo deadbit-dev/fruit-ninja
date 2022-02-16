@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Utils
 {
@@ -26,5 +27,7 @@ namespace Utils
 
             return weights.Count - 1;
         }
+
+        public static Vector2 VectorByAngle(float angle) => new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 }
