@@ -24,6 +24,7 @@ namespace Components.Physics
         }
 
         public Vector3 Velocity => velocity;
+        public float Torque2D => torque.z;
 
         private void FixedUpdate()
         {
@@ -45,6 +46,11 @@ namespace Components.Physics
         private void Torque()
         {
             transform.Rotate(torque);
+        }
+
+        public void AddForce2D(Vector3 forceVelocity)
+        {
+            velocity += forceVelocity;
         }
 
         public void AddForce2D(float angleInRad, float force)
