@@ -9,7 +9,6 @@ namespace Controllers
         public static HealthController Instance;
         
         [SerializeField] private HealthSettings settings;
-        [SerializeField] private UIController uiController;
 
         public event Action ZeroHeart;
 
@@ -23,16 +22,19 @@ namespace Controllers
         private void Start()
         {
             hearts = settings.CountHeart;
+            UIController.Instance.SetHeart(hearts);
         }
 
         public void Damage()
         {
-            hearts -= settings.DamageHeartCount;
-
             if (hearts == 0)
-            {
-               ZeroHeart?.Invoke(); 
+            { 
+                ZeroHeart?.Invoke();
+                return;
             }
+            
+            hearts -= settings.DamageHeartCount;
+            UIController.Instance.Damage(settings.DamageHeartCount);
         }
     }
 }

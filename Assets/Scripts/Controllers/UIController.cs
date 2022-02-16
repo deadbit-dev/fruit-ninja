@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,7 @@ namespace Controllers
         [SerializeField] private List<Text> currentScoreCounts;
         [SerializeField] private List<Text> bestScoreCounts;
         [SerializeField] private GameObject heartsContainer;
+        [SerializeField] private GameObject heartPrefab;
         [SerializeField] private GameObject gameOver;
 
         private void Awake()
@@ -20,10 +20,30 @@ namespace Controllers
             Instance = this;
         }
 
-        public void SetScore(int currentScore, int bestScore)
+        public void SetHeart(int hearts)
         {
-            currentScoreCounts.ForEach(count => count.text = currentScore.ToString());
-            bestScoreCounts.ForEach(count => count.text = bestScore.ToString());
+            for (var _ = 0; _ < hearts; _++)
+            {
+                Instantiate(heartPrefab, heartsContainer.transform);
+            }
+        }
+
+        public void Damage(int hearts)
+        {
+            for (var _ = 0; _ < hearts; _++)
+            {
+                Destroy(heartsContainer.transform.GetChild(heartsContainer.transform.childCount - 1).gameObject);
+            }
+        }
+
+        public void SetScore(int score)
+        {
+            currentScoreCounts.ForEach(count => count.text = score.ToString());
+        }
+
+        public void SetBestScore(int score)
+        {
+            bestScoreCounts.ForEach(count => count.text = score.ToString());
         }
 
         public void GameOver()
