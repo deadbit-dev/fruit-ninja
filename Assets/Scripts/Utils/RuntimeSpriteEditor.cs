@@ -6,10 +6,21 @@ namespace Utils
 {
     public static class RuntimeSpriteEditor
     {
-        public static (Sprite, Sprite) SpriteSliceByPivot(Sprite sprite, Vector2 sliceDirection)
-        { 
-            
+        public static float SmartSliceAngleBySliceDirection(Sprite sprite, Vector2 sliceDirection)
+        {
+             var sliceAngle = Vector2.Angle((new Vector2(sprite.pivot.x + sprite.rect.xMax, sprite.pivot.y) - sprite.pivot).normalized, sliceDirection);
+                        
+             if (sliceDirection.y < 0)
+             {
+                 sliceAngle = 180 - sliceAngle;
+             }
+                        
+             var angles = new List<float> {0f, 45f, 90f, 135f, 180f};
+             return angles[Math.ClampRangeWeight(angles, sliceAngle / 180f)];
+        }
 
+        public static (Sprite, Sprite) SpriteSliceBySmartAngle(Sprite sprite, float smartSliceAngle)
+        { 
             var vertices = new Tuple<Vector2[], Vector2[]>[]
             {
                 new Tuple<Vector2[], Vector2[]>(
@@ -91,22 +102,12 @@ namespace Utils
             };
             
             var angleToIndex = new Dictionary<float, int> { {0f, 0}, {90f, 1}, {45f, 2}, {135f, 3}, {180f, 0} };
-
-            var sliceAngle = Vector2.Angle((new Vector2(sprite.pivot.x + sprite.rect.xMax, sprite.pivot.y) - sprite.pivot).normalized, sliceDirection);
-            
-            if (sliceDirection.y < 0)
-            {
-                sliceAngle = 180 - sliceAngle;
-            }
-            
-            var angles = new List<float> {0f, 45f, 90f, 135f, 180f};
-            sliceAngle = angles[Math.ClampRangeWeight(angles, sliceAngle / 180f)];
-            
+           
             var spriteA = Sprite.Create(sprite.texture, sprite.rect, sprite.pivot, sprite.pixelsPerUnit);
             var spriteB = Sprite.Create(sprite.texture, sprite.rect, sprite.pivot, sprite.pixelsPerUnit);
 
-            spriteA.OverrideGeometry(vertices[angleToIndex[sliceAngle]].Item1, triangles[angleToIndex[sliceAngle]]);
-            spriteB.OverrideGeometry(vertices[angleToIndex[sliceAngle]].Item2, triangles[angleToIndex[sliceAngle]]);
+            spriteA.OverrideGeometry(vertices[angleToIndex[smartSliceAngle]].Item1, triangles[angleToIndex[smartSliceAngle]]);
+            spriteB.OverrideGeometry(vertices[angleToIndex[smartSliceAngle]].Item2, triangles[angleToIndex[smartSliceAngle]]);
            
             return (spriteA, spriteB);
         }
