@@ -1,3 +1,4 @@
+using Components.Physics;
 using UnityEngine;
 using Utils;
 using Interfaces.Physics;
@@ -9,6 +10,7 @@ namespace Components
     {
         [SerializeField] private BaseCollider bladeCollider;
         [SerializeField] private GameObject partUnitPrefab;
+        [SerializeField] private float forceSlice;
 
         private void OnEnable()
         {
@@ -38,7 +40,10 @@ namespace Components
             var unitPosition = unitTransform.position;
             var unitRotation = unitTransform.rotation;
             var unitLocalScale = unitTransform.lossyScale;
-            var parentUnit = unitTransform.parent;
+            var unitPhysics = unit.GetComponent<PhysicsUnit>();
+            var unitVelocity = unitPhysics.Velocity;
+            var unitTorque = unitPhysics.Torque2D;
+            
             var sliceSprite = unit.GetComponent<SpriteRenderer>().sprite;
 
             var contactSliceUV = RuntimeSpriteEditor.WorldPointToSpriteUV(sliceSprite, contactSlice, unitTransform);
@@ -46,8 +51,12 @@ namespace Components
 
             var sliceDirection = (contactSliceUV - spritePivotUV).normalized;
 
-            var (spriteA, spriteB) = RuntimeSpriteEditor.SpriteSliceByPivot(sliceSprite, sliceDirection);
+            var smartSliceAngle = RuntimeSpriteEditor.SmartSliceAngleBySliceDirection(sliceSprite, sliceDirection);
+
+            var (spriteA, spriteB) = RuntimeSpriteEditor.SpriteSliceBySmartAngle(sliceSprite, smartSliceAngle);
  
+            var parentUnit = unitTransform.parent;
+            
             var partA = Instantiate(partUnitPrefab, parentUnit);
             partA.GetComponent<Transform>().position = unitPosition;
             partA.transform.rotation = unitRotation;
@@ -63,8 +72,16 @@ namespace Components
             EffectController.Instance.InstanceSplatter(unitPosition, Color.white);
                          
             Destroy(unit);
-                         
-            // TODO: velocity for partA and partB by sliceDirection
+
+            var sliceDirectionImpulse = Vector2.Perpendicular(Math.VectorByAngle(smartSliceAngle)) * forceSlice;
+            
+            var partPhysicsUnit = partA.GetComponent<PhysicsUnit>();
+            partPhysicsUnit.AddForce2D(unitVelocity - (Vector3) sliceDirectionImpulse);
+            partPhysicsUnit.AddTorque2D(unitTorque);
+            
+            partPhysicsUnit = partA.GetComponent<PhysicsUnit>();
+            partPhysicsUnit.AddForce2D(unitVelocity + (Vector3) sliceDirectionImpulse);
+            partPhysicsUnit.AddTorque2D(unitTorque);           
         }
     }
 }
