@@ -7,47 +7,41 @@ namespace Controllers
     {
         public static ScoreController Instance;
 
-        public int CurrentScore { get; private set; }
-        public int BestScore { get; private set; }
+        private int currentScore;
+        private int bestScore;
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                DontDestroyOnLoad(gameObject);
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
         }
 
         public void LoadScore()
         {
-            CurrentScore = 0;
-            BestScore = 0;
+            currentScore = 0;
+            bestScore = 0;
             
             if (PlayerPrefs.HasKey("bestScore"))
             {
-                BestScore = PlayerPrefs.GetInt("bestScore");
+                bestScore = PlayerPrefs.GetInt("bestScore");
             }
             
-            UIController.Instance.SetScore(CurrentScore, BestScore);  
+            UIController.Instance.SetScore(currentScore);
+            UIController.Instance.SetBestScore(bestScore);
         }
 
         public void SetScore(Score score)
         {
-            CurrentScore += score.Count;
+            currentScore += score.Count;
             
-            if (CurrentScore > BestScore)
+            if (currentScore > bestScore)
             {
-                BestScore = CurrentScore;
-                PlayerPrefs.SetInt("bestScore", BestScore);
+                bestScore = currentScore;
+                PlayerPrefs.SetInt("bestScore", bestScore);
                 PlayerPrefs.Save();
             }
             
-            UIController.Instance.SetScore(CurrentScore, BestScore);
+            UIController.Instance.SetScore(currentScore);
+            UIController.Instance.SetBestScore(bestScore);
         }
 
         public void ResetScore()
