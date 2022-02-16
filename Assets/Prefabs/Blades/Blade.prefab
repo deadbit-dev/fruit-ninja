@@ -169,3 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bladeCollider: {fileID: 7997176575798017739}
   partUnitPrefab: {fileID: 9175702825001703711, guid: 989b902c71ab3b94598d28da1fa8d6e2, type: 3}
+  forceSlice: 0.1
