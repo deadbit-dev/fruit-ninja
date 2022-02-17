@@ -3,7 +3,6 @@ using UnityEngine;
 using Utils;
 using Interfaces.Physics;
 using Components.Physics;
-using Controllers;
 
 namespace Components
 {
@@ -16,6 +15,8 @@ namespace Components
         [SerializeField] private SpaceCollider2D spaceCollider2D;
         [Space] 
         [SerializeField] private Vector3 increaseSizeCollisionSpace2D;
+        
+        public event Action<GameObject> UnitExit;
 
         private void Awake()
         {
@@ -39,12 +40,7 @@ namespace Components
                 return;
             }
 
-            if (info.Collider.gameObject.CompareTag("Unit"))
-            {
-                HealthController.Instance.Damage();
-            }
-            
-            Destroy(info.Collider.gameObject);
+            UnitExit?.Invoke(info.Collider.gameObject);
         }
 
         private void SetSizeCollisionSpace2D()

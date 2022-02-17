@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Components;
@@ -6,30 +7,31 @@ namespace Controllers
 {
     public class BladeController : MonoBehaviour
     {
-        public static BladeController Instance;
-        
         [SerializeField] private InputController inputController;
         [SerializeField] private GameField2D gameField2D;
         [SerializeField] private GameObject bladePrefab;
         [Space]
         [SerializeField] private float minSpeed;
 
-        private GameObject bladeObject;
-        private TrailRenderer bladeTrail;
-        private Blade bladeScript;
-        private Vector2 previousPosition;
+        private GameObject _bladeObject;
+        private TrailRenderer _bladeTrail;
+        private Vector2 _previousPosition;
+        private Blade _bladeScript;
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+        public event Action<GameObject, Vector3> OnBladeContactWithUnit;
 
         private void Start()
         {
-            bladeObject = Instantiate(bladePrefab, gameField2D.transform);
-            bladeTrail = bladeObject.GetComponent<TrailRenderer>();
-            bladeScript = bladeObject.GetComponent<Blade>();
-            bladeScript.enabled = false;
+            _bladeObject = Instantiate(bladePrefab, gameField2D.transform);
+            _bladeTrail = _bladeObject.GetComponent<TrailRenderer>();
+            _bladeScript = _bladeObject.GetComponent<Blade>();
+            _bladeScript.OnContactWithUnit += BladeContactWithUnitEvent;
+            _bladeScript.enabled = false;
+        }
+        
+        private void BladeContactWithUnitEvent(GameObject unit, Vector3 contactPosition)
+        {
+            OnBladeContactWithUnit?.Invoke(unit, contactPosition);
         }
 
         private void OnEnable()
@@ -46,23 +48,23 @@ namespace Controllers
 
         private void TouchStart(Vector2 point)
         {
-            previousPosition = gameField2D.ScreenPointToGameField2D(point);
-            bladeTrail.enabled = true;
+            _previousPosition = gameField2D.ScreenPointToGameField2D(point);
+            _bladeTrail.enabled = true;
             
             StartCoroutine(nameof(BladeTrail));
         }
 
         private IEnumerator BladeTrail()
         {
-            while (true)
+            while (enabled)
             {
                 Vector2 newPosition = gameField2D.ScreenPointToGameField2D(InputController.PrimaryPosition());
                
-                bladeObject.transform.position = newPosition;
+                _bladeObject.transform.position = newPosition;
                 
                 IsSlice(newPosition);
                 
-                previousPosition = newPosition;
+                _previousPosition = newPosition;
                 
                 yield return null;
             }
@@ -70,23 +72,23 @@ namespace Controllers
 
         private void TouchEnd(Vector2 point)
         {
-            bladeScript.enabled = false;
-            bladeTrail.enabled = false; 
+            _bladeScript.enabled = false;
+            _bladeTrail.enabled = false; 
             
             StopCoroutine(nameof(BladeTrail));
         }
 
         private void IsSlice(Vector2 position)
         {
-            var speed = (position - previousPosition).magnitude * Time.deltaTime;
+            var speed = (position - _previousPosition).magnitude * Time.deltaTime;
 
             if (speed < minSpeed)
             {
-                bladeScript.enabled = false;
+                _bladeScript.enabled = false;
                 return;
             }
             
-            bladeScript.enabled = true;
+            _bladeScript.enabled = true;
         }
     }
 }

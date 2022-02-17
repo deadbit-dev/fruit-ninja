@@ -1,47 +1,47 @@
+using System;
 using Components;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Controllers
 {
     public class ScoreController : MonoBehaviour
     {
-        public static ScoreController Instance;
+        [SerializeField] private ScoreSettings settings;
 
-        private int currentScore;
-        private int bestScore;
+        public event Action<int> ScoreChanged;
+        public event Action<int> BestScoreChanged;
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+        private int _currentScore;
+        private int _bestScore;
 
         public void LoadScore()
         {
-            currentScore = 0;
-            bestScore = 0;
+            _currentScore = 0;
+            _bestScore = 0;
             
             if (PlayerPrefs.HasKey("bestScore"))
             {
-                bestScore = PlayerPrefs.GetInt("bestScore");
+                _bestScore = PlayerPrefs.GetInt("bestScore");
             }
-            
-            UIController.Instance.SetScore(currentScore);
-            UIController.Instance.SetBestScore(bestScore);
+           
+            ScoreChanged?.Invoke(_currentScore);
+            BestScoreChanged?.Invoke(_bestScore);
         }
 
-        public void SetScore(Score score)
+        public void AddScore()
         {
-            currentScore += score.Count;
+            _currentScore += settings.ScoreForSlicing;
             
-            if (currentScore > bestScore)
+            if (_currentScore > _bestScore)
             {
-                bestScore = currentScore;
-                PlayerPrefs.SetInt("bestScore", bestScore);
+                _bestScore = _currentScore;
+                PlayerPrefs.SetInt("bestScore", _bestScore);
                 PlayerPrefs.Save();
             }
             
-            UIController.Instance.SetScore(currentScore);
-            UIController.Instance.SetBestScore(bestScore);
+            ScoreChanged?.Invoke(_currentScore);
+            BestScoreChanged?.Invoke(_bestScore);           
         }
 
         public void ResetScore()

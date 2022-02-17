@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Components;
+using Random = UnityEngine.Random;
 
 namespace Controllers
 {
@@ -9,9 +11,9 @@ namespace Controllers
         public static EffectController Instance;
 
         [SerializeField] private GameField2D gameField2D;
-        [SerializeField] private GameObject splatterPrefab;
+        [SerializeField] private GameObject effectPrefab;
         [SerializeField] private Sprite[] splatterSprites;
-
+        [Space]
         [SerializeField] private float deltaAlphaFade;
         [SerializeField] private float deltaTimeFade;
 
@@ -36,10 +38,10 @@ namespace Controllers
             }
         }
         
-        public void InstanceSplatter(Vector3 position, Color color)
+        public void SplatterEffect2D(Vector3 position, Color color)
         {
             var splatter = Instantiate(
-                splatterPrefab, 
+                effectPrefab, 
                 position, 
                 Quaternion.Euler(new Vector3(0, 0, Random.Range(0f, 360f))), 
                 gameField2D.transform);

@@ -5,11 +5,11 @@ namespace Controllers
 {
     public class SceneController : MonoBehaviour
     {
-        public static SceneController Instance;
+        private static SceneController _instance;
 
         private void Awake()
         {
-            Instance = this;
+            _instance = this;
         }
 
         public static void SwitchScene(string sceneName)

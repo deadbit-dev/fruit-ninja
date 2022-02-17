@@ -4,10 +4,10 @@ namespace Interfaces.Physics
 {
     public interface ICollider
     {
-        abstract event Action<ICollision> CollisionEnter;
-        abstract event Action<ICollision> CollisionExit;
-        
-        abstract void CollisionEnterEvent(ICollision info);
-        abstract void CollisionExitEvent(ICollision info);
+        event Action<ICollision> CollisionEnter;
+        event Action<ICollision> CollisionExit;
+
+        void CollisionEnterEvent(ICollision info);
+        void CollisionExitEvent(ICollision info);
     }
 }

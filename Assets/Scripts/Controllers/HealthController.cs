@@ -6,35 +6,46 @@ namespace Controllers
 {
     public class HealthController : MonoBehaviour
     {
-        public static HealthController Instance;
-        
         [SerializeField] private HealthSettings settings;
 
-        public event Action ZeroHeart;
+        public event Action<int> OnLoadHealth;
+        public event Action<int> OnHealing;
+        public event Action<int> OnDamage;
+        public event Action ZeroHealth;
 
-        private int hearts;
+        private int _healths;
 
-        private void Awake()
+        public void LoadHealth()
         {
-            Instance = this;
+            _healths = settings.MaxHeart;
+            OnLoadHealth?.Invoke(settings.MaxHeart);
         }
 
-        private void Start()
+        public void Healing()
         {
-            hearts = settings.CountHeart;
-            UIController.Instance.SetHeart(hearts);
+            if (_healths >= settings.MaxHeart)
+            {
+                return;
+            }
+            
+            _healths += settings.Healing;
+            OnHealing?.Invoke(settings.Healing);
         }
 
         public void Damage()
         {
-            if (hearts == 0)
-            { 
-                ZeroHeart?.Invoke();
+            if (_healths == 0)
+            {
                 return;
             }
             
-            hearts -= settings.DamageHeartCount;
-            UIController.Instance.Damage(settings.DamageHeartCount);
+            _healths -= settings.Damage;
+            OnDamage?.Invoke(settings.Damage);
+            
+            if (_healths == 0)
+            { 
+                ZeroHealth?.Invoke();
+            }
         }
     }
 }

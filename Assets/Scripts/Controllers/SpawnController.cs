@@ -8,18 +8,11 @@ namespace Controllers
 {
     public class SpawnController : MonoBehaviour
     {
-        public static SpawnController Instance;
-        
         [SerializeField] private SpawnSettings settings;
         [SerializeField] private GameField2D gameField2D;
 
-        private float spawnStartTime;
+        private float _spawnStartTime;
         
-        private void Awake()
-        {
-            Instance = this;
-        }
-
         private IEnumerator SpawnPackWithInterval(float interval)
         {
             while (true)
@@ -32,13 +25,13 @@ namespace Controllers
                     spawnZone,
                     gameField2D.ViewportPointToGameField2D(spawnZone.FirstPoint),
                     gameField2D.ViewportPointToGameField2D(spawnZone.SecondPoint),
-                    settings.SpawnPack.DelayCurve.Evaluate((Time.time / spawnStartTime) / settings.Duration)));               
+                    settings.SpawnPack.DelayCurve.Evaluate((Time.time / _spawnStartTime) / settings.Duration)));               
             }
         }
 
         private IEnumerator SpawnUnitWithDelay(SpawnZone spawnZone, Vector3 pointA, Vector3 pointB, float delay)
         {
-            for (var i = 0; i < settings.SpawnPack.CountCurve.Evaluate((Time.time / spawnStartTime) / settings.Duration); i++)
+            for (var i = 0; i < settings.SpawnPack.CountCurve.Evaluate((Time.time / _spawnStartTime) / settings.Duration); i++)
             {
                 var weight = Random.value;
 
@@ -58,8 +51,8 @@ namespace Controllers
         
         public void StartSpawn()
         {
-            spawnStartTime = Time.realtimeSinceStartup;
-            StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate((Time.time / spawnStartTime) / settings.Duration)));
+            _spawnStartTime = Time.realtimeSinceStartup;
+            StartCoroutine(SpawnPackWithInterval(settings.SpawnCurve.Evaluate((Time.time / _spawnStartTime) / settings.Duration)));
         }
          
         public void StopSpawn()
