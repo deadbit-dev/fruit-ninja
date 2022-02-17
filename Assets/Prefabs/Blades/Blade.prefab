@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 1
   offset: {x: 0, y: 0}
-  radius: 0.5
+  radius: 0.2
 --- !u!114 &-7543395811692922233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,5 +168,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bladeCollider: {fileID: 7997176575798017739}
-  partUnitPrefab: {fileID: 9175702825001703711, guid: 989b902c71ab3b94598d28da1fa8d6e2, type: 3}
-  forceSlice: 0.1
+  force: 1.5
+  torque: 3

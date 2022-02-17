@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 6387688044344534449}
   - component: {fileID: 6101431553714032440}
   - component: {fileID: 2320287684774537756}
-  - component: {fileID: -276571599435803025}
   m_Layer: 0
   m_Name: Limon
-  m_TagString: Unit
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,22 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3dc8f4151f4c23b85cc5917b94200f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 6101431553714032440}
   simulate: 1
   mass: 1.7
-  axisGravity: {x: 0, y: -1, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  torque: {x: 0, y: 0, z: 0}
---- !u!114 &-276571599435803025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563370794022342672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fd05566081491fb91cd1233aa99b6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  count: 10
+  axisGravity2D: {x: 0, y: -1}
+  velocity2D: {x: 0, y: 0}
+  torque2D: 0
