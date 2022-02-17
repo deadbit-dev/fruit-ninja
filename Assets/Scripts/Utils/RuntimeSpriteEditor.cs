@@ -18,9 +18,11 @@ namespace Utils
              var angles = new List<float> {0f, 45f, 90f, 135f, 180f};
              return angles[Math.ClampRangeWeight(angles, sliceAngle / 180f)];
         }
-
-        public static (Sprite, Sprite) SpriteSliceBySmartAngle(Sprite sprite, float smartSliceAngle)
+        
+        public static void SpriteSliceBySmartAngle(Sprite sprite, ref Sprite spriteA, ref Sprite spriteB, float smartSliceAngle)
         { 
+            // TODO: move this data inside method
+            
             var vertices = new Tuple<Vector2[], Vector2[]>[]
             {
                 new Tuple<Vector2[], Vector2[]>(
@@ -102,24 +104,21 @@ namespace Utils
             };
             
             var angleToIndex = new Dictionary<float, int> { {0f, 0}, {90f, 1}, {45f, 2}, {135f, 3}, {180f, 0} };
-           
-            var spriteA = Sprite.Create(sprite.texture, sprite.rect, sprite.pivot, sprite.pixelsPerUnit);
-            var spriteB = Sprite.Create(sprite.texture, sprite.rect, sprite.pivot, sprite.pixelsPerUnit);
 
             spriteA.OverrideGeometry(vertices[angleToIndex[smartSliceAngle]].Item1, triangles[angleToIndex[smartSliceAngle]]);
             spriteB.OverrideGeometry(vertices[angleToIndex[smartSliceAngle]].Item2, triangles[angleToIndex[smartSliceAngle]]);
-           
-            return (spriteA, spriteB);
         }
 
+        public static Vector2 SliceDirectionByContact(Sprite sprite, Vector2 contactUV) => (contactUV - SpritePivotUV(sprite)).normalized;
+        
         public static Vector2 SpritePivotUV(Sprite sprite)
         {
             return (new Vector2(sprite.rect.x, sprite.rect.y) + sprite.pivot) / sprite.rect.max;
         }
 
-        public static Vector2 WorldPointToSpriteUV(Sprite sprite, Vector3 worldPoint, Transform transform)
+        public static Vector2 WorldPointToSpriteUV(Sprite sprite, Vector3 worldPoint, Transform spriteTransform)
         {
-            return SpritePivotUV(sprite) + (Vector2) transform.InverseTransformPoint(worldPoint) * sprite.pixelsPerUnit;
+            return SpritePivotUV(sprite) + (Vector2) spriteTransform.InverseTransformPoint(worldPoint) * sprite.pixelsPerUnit;
         }
     }
 }
