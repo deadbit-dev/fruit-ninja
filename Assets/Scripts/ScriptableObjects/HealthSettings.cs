@@ -5,10 +5,12 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "HealthSettings", menuName = "Health Settings", order = 0)]
     public class HealthSettings : ScriptableObject
     {
-        [SerializeField] private int countHeart;
-        [SerializeField] private int damageHeartCount;
+        [SerializeField] private int maxHeart;
+        [SerializeField] private int healing;
+        [SerializeField] private int damage;
         
-        public int CountHeart => countHeart;
-        public int DamageHeartCount => damageHeartCount;
+        public int MaxHeart => maxHeart;
+        public int Healing => healing;
+        public int Damage => damage;
     }
 }

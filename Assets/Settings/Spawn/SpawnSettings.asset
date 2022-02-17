@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe7c9097ec14b26b99198451029626d, type: 3}
   m_Name: SpawnSettings
   m_EditorClassIdentifier: 
-  duration: 10
+  duration: 25
   spawnCurve:
     serializedVersion: 2
     m_Curve:
