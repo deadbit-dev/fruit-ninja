@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Unit
+  - Part
+  - Fruit
+  - Bomb
+  - Heart
   layers:
   - Default
   - TransparentFX
