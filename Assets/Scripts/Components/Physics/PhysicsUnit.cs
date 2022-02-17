@@ -3,17 +3,14 @@ using UnityEngine;
 
 namespace Components.Physics
 {
-    [RequireComponent(typeof(BaseCollider))]
     public class PhysicsUnit : MonoBehaviour
     {
-        [SerializeField] private BaseCollider body;
-        [Space]
         [SerializeField] private bool simulate;
         [Space] 
         [SerializeField] private float mass;
-        [SerializeField] private Vector3 axisGravity;
-        [SerializeField] private Vector3 velocity;
-        [SerializeField] private Vector3 torque;
+        [SerializeField] private Vector2 axisGravity2D;
+        [SerializeField] private Vector2 velocity2D;
+        [SerializeField] private float torque2D;
 
         private const float Gravity = 9.8f;
         
@@ -23,8 +20,8 @@ namespace Components.Physics
             set => mass = value;
         }
 
-        public Vector3 Velocity => velocity;
-        public float Torque2D => torque.z;
+        public Vector2 Velocity2D => velocity2D;
+        public float Torque2D => torque2D;
 
         private void FixedUpdate()
         {
@@ -34,33 +31,28 @@ namespace Components.Physics
             }
             
             Simulate();
-            Torque();
         }
 
         private void Simulate()
         {
-            velocity += axisGravity * (Gravity * mass) * Time.fixedDeltaTime;
-            transform.position += velocity * Time.fixedDeltaTime;
+            velocity2D += Gravity * mass * axisGravity2D * Time.fixedDeltaTime;
+            transform.position += (Vector3) velocity2D * Time.fixedDeltaTime;
+            transform.Rotate(new Vector3(0, 0,torque2D));
         }
 
-        private void Torque()
+        public void AddForce2D(Vector2 forceVelocity)
         {
-            transform.Rotate(torque);
-        }
-
-        public void AddForce2D(Vector3 forceVelocity)
-        {
-            velocity += forceVelocity;
+            velocity2D += forceVelocity;
         }
 
         public void AddForce2D(float angleInRad, float force)
         {
-            velocity += new Vector3(Mathf.Cos(angleInRad), Mathf.Sin(angleInRad)) * force;
+            velocity2D += new Vector2(Mathf.Cos(angleInRad), Mathf.Sin(angleInRad)) * force;
         }
 
         public void AddTorque2D(float angle)
         {
-            torque.z += angle;
+            torque2D += angle;
         }
     }
 }
