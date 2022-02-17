@@ -689,8 +689,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -198.75171}
-  m_SizeDelta: {x: 700, y: 102.49653}
+  m_AnchoredPosition: {x: 350, y: -198.63455}
+  m_SizeDelta: {x: 700, y: 102.73095}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &491160462
 MonoBehaviour:
@@ -815,6 +815,7 @@ GameObject:
   - component: {fileID: 599795256}
   - component: {fileID: 599795255}
   - component: {fileID: 599795254}
+  - component: {fileID: 599795259}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -860,7 +861,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -970,6 +971,25 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!95 &599795259
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599795252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e711e5fe45b2d140b63f6f1164f8def, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &619589791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,8 +1026,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -61.251728}
-  m_SizeDelta: {x: 700, y: 122.503456}
+  m_AnchoredPosition: {x: 350, y: -61.134537}
+  m_SizeDelta: {x: 700, y: 122.26907}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &619589793
 MonoBehaviour:
@@ -1102,7 +1122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &621710216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1145,7 +1165,7 @@ MonoBehaviour:
   m_CellSize: {x: 45, y: 45}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
-  m_ConstraintCount: 5
+  m_ConstraintCount: 10
 --- !u!1 &627590416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,6 +1590,7 @@ GameObject:
   - component: {fileID: 1201150803}
   - component: {fileID: 1201150802}
   - component: {fileID: 1201150800}
+  - component: {fileID: 1201150801}
   m_Layer: 5
   m_Name: Home
   m_TagString: Untagged
@@ -1615,7 +1636,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1652,6 +1673,25 @@ MonoBehaviour:
           m_StringArgument: menu
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &1201150801
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201150798}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1897084c49e483c41ad9aa3de0dc8d7d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1201150802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1746,8 +1786,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169.64995, y: -25.624132}
-  m_SizeDelta: {x: 339.2999, y: 51.248264}
+  m_AnchoredPosition: {x: 169.63933, y: -25.682737}
+  m_SizeDelta: {x: 339.27866, y: 51.365475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297000496
 MonoBehaviour:
@@ -1935,8 +1975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -76.8724}
-  m_SizeDelta: {x: 700, y: 51.248264}
+  m_AnchoredPosition: {x: 350, y: -77.04821}
+  m_SizeDelta: {x: 700, y: 51.365475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550021516
 MonoBehaviour:
@@ -2008,8 +2048,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -25.624132}
-  m_SizeDelta: {x: 700, y: 51.248264}
+  m_AnchoredPosition: {x: 350, y: -25.682737}
+  m_SizeDelta: {x: 700, y: 51.365475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1569127330
 MonoBehaviour:
@@ -2214,8 +2254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 531.5786, y: -25.624132}
-  m_SizeDelta: {x: 336.8428, y: 51.248264}
+  m_AnchoredPosition: {x: 531.5831, y: -25.682737}
+  m_SizeDelta: {x: 336.8337, y: 51.365475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668693123
 MonoBehaviour:
@@ -2446,8 +2486,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 166.5786, y: -25.624132}
-  m_SizeDelta: {x: 333.1572, y: 51.248264}
+  m_AnchoredPosition: {x: 166.58315, y: -25.682737}
+  m_SizeDelta: {x: 333.1663, y: 51.365475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827698990
 MonoBehaviour:
@@ -2665,8 +2705,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 534.64996, y: -25.624132}
-  m_SizeDelta: {x: 330.70013, y: 51.248264}
+  m_AnchoredPosition: {x: 534.6393, y: -25.682737}
+  m_SizeDelta: {x: 330.7213, y: 51.365475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081076546
 MonoBehaviour:
