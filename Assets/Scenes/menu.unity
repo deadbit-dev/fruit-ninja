@@ -1043,6 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baaf1b307734a85ad9d690784d9bf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreController: {fileID: 1437111716}
 --- !u!114 &1437111715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,16 +1053,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437111711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b34c0cfff44e9199d8161215f3ff2d, type: 3}
+  m_Script: {fileID: 11500000, guid: dea857f5c1554645b9c1709c91ba9f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreContainer: {fileID: 0}
-  currentScoreCounts: []
-  bestScoreCounts:
-  - {fileID: 1402679166}
-  heartsContainer: {fileID: 0}
-  heartPrefab: {fileID: 0}
-  gameOver: {fileID: 0}
+  bestScoreCount: {fileID: 1402679166}
+  scoreController: {fileID: 1437111716}
 --- !u!114 &1437111716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,6 +1070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a8a4f2e19c4e30b5e707e04f9aab18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 32f2ce18b496c8c4093b32e476aef5bc, type: 2}
 --- !u!1 &1927282451
 GameObject:
   m_ObjectHideFlags: 0
