@@ -79,17 +79,17 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   spawnUnits:
-  - priorityPercent: 50
+  - priorityPercent: 15
     unitType: {fileID: 8149739458007504070, guid: 7caacd23f1d96a94e83dc0b79162681d, type: 3}
-  - priorityPercent: 50
+  - priorityPercent: 15
     unitType: {fileID: 5068492606130922959, guid: ca39eea04195d1f40b93639c749c3552, type: 3}
-  - priorityPercent: 50
+  - priorityPercent: 15
     unitType: {fileID: 7316617828917089713, guid: 8df4a085c231cc94390abfb395e7d216, type: 3}
-  - priorityPercent: 50
+  - priorityPercent: 15
     unitType: {fileID: 451767372786812431, guid: 85054a332dffc6f478137ad445deac27, type: 3}
-  - priorityPercent: 50
+  - priorityPercent: 15
     unitType: {fileID: 2320287684774537756, guid: 954f5817fa62f964a89b2a2361e90a94, type: 3}
-  - priorityPercent: 10
+  - priorityPercent: 5
     unitType: {fileID: 8149739458007504070, guid: 2798337f24ae4ba4dba5a231439b921d, type: 3}
   - priorityPercent: 10
     unitType: {fileID: 8149739458007504070, guid: 9a8cfa86df6bd574981c7ec5fb311d69, type: 3}
