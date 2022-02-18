@@ -1382,7 +1382,6 @@ GameObject:
   - component: {fileID: 1153728634}
   - component: {fileID: 1153728629}
   - component: {fileID: 1153728631}
-  - component: {fileID: 1153728639}
   - component: {fileID: 1153728630}
   - component: {fileID: 1153728632}
   - component: {fileID: 1153728628}
@@ -1411,7 +1410,6 @@ MonoBehaviour:
   gameUIController: {fileID: 1153728634}
   healthController: {fileID: 1153728629}
   scoreController: {fileID: 1153728631}
-  sliceController: {fileID: 1153728639}
   bladeController: {fileID: 1153728630}
   spawnController: {fileID: 1153728632}
 --- !u!114 &1153728629
@@ -1564,20 +1562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b5efb429f64035b60ca3bb7497cd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1153728639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153728627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90956e3e73e34e67893cd3b3f8197a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 1
-  torque: 3
 --- !u!1 &1201150798
 GameObject:
   m_ObjectHideFlags: 0
