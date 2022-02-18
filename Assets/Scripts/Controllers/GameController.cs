@@ -59,15 +59,15 @@ namespace Controllers
                     break;
                 
                 case "Heart":
-                    unit.GetComponent<ParticleSystem>().Stop();
                     sliceController.Slice(unit, contactPosition);
                     effectController.SplatterEffect2D(contactPosition, Color.magenta);
                     healthController.Healing();
                     break;
                 
                 case "Bomb":
-                    healthController.Damage();
                     Destroy(unit);
+                    effectController.ExplosionEffect2D(contactPosition);
+                    healthController.Damage();
                     break;
             }
         }
