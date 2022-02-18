@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Controllers
+namespace Controllers.Menu
 {
     public class MenuUIController : MonoBehaviour
     {

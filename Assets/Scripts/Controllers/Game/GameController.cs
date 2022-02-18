@@ -5,7 +5,7 @@ using UnityEngine;
 using Utils;
 using Math = Utils.Math;
 
-namespace Controllers
+namespace Controllers.Game
 {
     public class GameController : MonoBehaviour
     {
@@ -16,7 +16,6 @@ namespace Controllers
         [SerializeField] private GameUIController gameUIController;
         [SerializeField] private HealthController healthController;
         [SerializeField] private ScoreController scoreController;
-        [SerializeField] private SliceController sliceController;
         [SerializeField] private BladeController bladeController;
         [SerializeField] private SpawnController spawnController;
 
@@ -29,14 +28,14 @@ namespace Controllers
         {
             healthController.ZeroHealth += GameOver;
             gameField2D.UnitExit += UnitExitGameField;
-            bladeController.OnBladeContactWithUnit += BladeContactWithUnit;
+            bladeController.OnBladeContact += BladeContact;
         }
 
         private void OnDisable()
         {
             healthController.ZeroHealth -= GameOver;
             gameField2D.UnitExit -= UnitExitGameField;
-            bladeController.OnBladeContactWithUnit -= BladeContactWithUnit;
+            bladeController.OnBladeContact -= BladeContact;
         }
 
         private void StartGame()
@@ -48,18 +47,18 @@ namespace Controllers
             spawnController.StartSpawn();
         }
         
-        private void BladeContactWithUnit(GameObject unit, Vector3 contactPosition)
+        private void BladeContact(GameObject unit, Vector3 contactPosition)
         {
             switch (unit.tag)
             {
                 case "Fruit":
-                    sliceController.Slice(unit, contactPosition);
+                    Slicer.Slice(unit, contactPosition);
                     effectController.SplatterEffect2D(contactPosition, Color.white);
                     scoreController.AddScore();
                     break;
                 
                 case "Heart":
-                    sliceController.Slice(unit, contactPosition);
+                    Slicer.Slice(unit, contactPosition);
                     effectController.SplatterEffect2D(contactPosition, Color.magenta);
                     healthController.Healing();
                     break;

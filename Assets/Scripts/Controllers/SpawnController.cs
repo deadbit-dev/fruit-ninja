@@ -4,7 +4,7 @@ using Components;
 using ScriptableObjects;
 using Random = UnityEngine.Random;
 
-namespace Controllers 
+namespace Controllers
 {
     public class SpawnController : MonoBehaviour
     {
