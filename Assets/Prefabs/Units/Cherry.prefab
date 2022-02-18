@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTrigger: 0
-  offset: {x: 0, y: 0}
-  radius: 0.5
+  offset: {x: 0, y: -0.2}
+  radius: 0.7
 --- !u!114 &451767372786812431
 MonoBehaviour:
   m_ObjectHideFlags: 0

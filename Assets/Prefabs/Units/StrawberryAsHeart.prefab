@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8149739458007504070}
   - component: {fileID: 4613723841598013324}
   m_Layer: 0
-  m_Name: StrawberryHeart
+  m_Name: StrawberryAsHeart
   m_TagString: Heart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -919,7 +919,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 25
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4806,7 +4806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrigger: 0
   offset: {x: 0, y: 0}
-  radius: 0.5
+  radius: 0.9
 --- !u!114 &8149739458007504070
 MonoBehaviour:
   m_ObjectHideFlags: 0
