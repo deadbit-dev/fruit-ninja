@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Components;
+using Interfaces.Physics;
 
 namespace Controllers
 {
@@ -14,24 +15,28 @@ namespace Controllers
         [SerializeField] private float minSpeed;
 
         private GameObject _bladeObject;
-        private TrailRenderer _bladeTrail;
+        private BaseCollider _bladeCollider;
         private Vector2 _previousPosition;
-        private Blade _bladeScript;
+        private Coroutine _bladeTrail;
 
-        public event Action<GameObject, Vector3> OnBladeContactWithUnit;
+        public event Action<GameObject, Vector3> OnBladeContact;
 
         private void Start()
         {
             _bladeObject = Instantiate(bladePrefab, gameField2D.transform);
-            _bladeTrail = _bladeObject.GetComponent<TrailRenderer>();
-            _bladeScript = _bladeObject.GetComponent<Blade>();
-            _bladeScript.OnContactWithUnit += BladeContactWithUnitEvent;
-            _bladeScript.enabled = false;
+            _bladeCollider = _bladeObject.GetComponent<BaseCollider>();
+            _bladeCollider.CollisionEnter += BladeCollisionEnter;
+            _bladeObject.SetActive(false);
         }
-        
-        private void BladeContactWithUnitEvent(GameObject unit, Vector3 contactPosition)
+
+        private void BladeCollisionEnter(ICollision info)
         {
-            OnBladeContactWithUnit?.Invoke(unit, contactPosition);
+            if (info.Collider == null)
+            {
+                return;
+            }
+            
+            OnBladeContact?.Invoke(info.Collider.gameObject, info.ContactPosition);
         }
 
         private void OnEnable()
@@ -49,9 +54,10 @@ namespace Controllers
         private void TouchStart(Vector2 point)
         {
             _previousPosition = gameField2D.ScreenPointToGameField2D(point);
-            _bladeTrail.enabled = true;
+            _bladeObject.SetActive(true);
+            _bladeCollider.enabled = false;
             
-            StartCoroutine(nameof(BladeTrail));
+            _bladeTrail = StartCoroutine(BladeTrail());
         }
 
         private IEnumerator BladeTrail()
@@ -70,25 +76,24 @@ namespace Controllers
             }
         }
 
-        private void TouchEnd(Vector2 point)
-        {
-            _bladeScript.enabled = false;
-            _bladeTrail.enabled = false; 
-            
-            StopCoroutine(nameof(BladeTrail));
-        }
-
         private void IsSlice(Vector2 position)
         {
             var speed = (position - _previousPosition).magnitude * Time.deltaTime;
 
             if (speed < minSpeed)
             {
-                _bladeScript.enabled = false;
+                _bladeCollider.enabled = false;
                 return;
             }
             
-            _bladeScript.enabled = true;
+            _bladeCollider.enabled = true;
+        }
+        
+        private void TouchEnd(Vector2 point)
+        {
+            _bladeObject.SetActive(false);
+            
+            StopCoroutine(_bladeTrail);
         }
     }
 }
