@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Utils
 {
@@ -19,7 +20,7 @@ namespace Utils
              return angles[Math.ClampRangeWeight(angles, sliceAngle / 180f)];
         }
         
-        public static void SpriteSliceBySmartAngle(Sprite sprite, ref Sprite spriteA, ref Sprite spriteB, float smartSliceAngle)
+        public static (Sprite, Sprite) SpriteSliceBySmartAngle(Sprite sprite, float smartSliceAngle)
         { 
             // TODO: move this data inside method
             
@@ -105,8 +106,13 @@ namespace Utils
             
             var angleToIndex = new Dictionary<float, int> { {0f, 0}, {90f, 1}, {45f, 2}, {135f, 3}, {180f, 0} };
 
+            var spriteA = Object.Instantiate(sprite);
+            var spriteB = Object.Instantiate(sprite);
+
             spriteA.OverrideGeometry(vertices[angleToIndex[smartSliceAngle]].Item1, triangles[angleToIndex[smartSliceAngle]]);
             spriteB.OverrideGeometry(vertices[angleToIndex[smartSliceAngle]].Item2, triangles[angleToIndex[smartSliceAngle]]);
+            
+            return (spriteA, spriteB);
         }
 
         public static Vector2 SliceDirectionByContact(Sprite sprite, Vector2 contactUV) => (contactUV - SpritePivotUV(sprite)).normalized;
