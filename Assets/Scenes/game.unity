@@ -1483,12 +1483,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameField2D: {fileID: 1624889134}
-  effectPrefab: {fileID: 3555477366350049089, guid: 67b12fa9f6e048a4aa3ac13be95aca5b, type: 3}
   splatterSprites:
   - {fileID: 5926034904275614944, guid: 01186c33ca3b01c4b9100ecc883359e7, type: 3}
   - {fileID: 6732405791732971777, guid: 01186c33ca3b01c4b9100ecc883359e7, type: 3}
   deltaAlphaFade: 0.01
   deltaTimeFade: 0.05
+  explosionEffect: {fileID: 6957005294173464105, guid: 33170c18c366d584e86b08268f2bd41c, type: 3}
+  lifeTimeExplosionEffect: 1
 --- !u!114 &1153728634
 MonoBehaviour:
   m_ObjectHideFlags: 0
