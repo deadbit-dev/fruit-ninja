@@ -16,7 +16,7 @@ namespace Components
         [Space] 
         [SerializeField] private Vector3 increaseSizeCollisionSpace2D;
         
-        public event Action<GameObject> UnitExit;
+        public event Action<GameObject> OnExitUnit;
 
         private void Awake()
         {
@@ -40,7 +40,9 @@ namespace Components
                 return;
             }
 
-            UnitExit?.Invoke(info.Collider.gameObject);
+            OnExitUnit?.Invoke(info.Collider.gameObject);
+            
+            Destroy(info.Collider.gameObject);
         }
 
         private void SetSizeCollisionSpace2D()
