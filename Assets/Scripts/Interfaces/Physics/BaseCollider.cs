@@ -8,10 +8,15 @@ namespace Interfaces.Physics
     {
         [SerializeField] private bool isTrigger;
         
-        public bool IsTrigger => isTrigger;
         public event Action<ICollision> CollisionEnter;
         public event Action<ICollision> CollisionExit;
         
+        public bool IsTrigger
+        {
+            get => isTrigger;
+            set => isTrigger = value;
+        }
+
         private void Awake()
         {
             PhysicsController.Instance.AddCollider(this); 
