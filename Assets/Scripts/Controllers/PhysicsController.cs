@@ -15,21 +15,21 @@ namespace Controllers
     {
         public static PhysicsController Instance;
         
-        private Dictionary<BaseCollider, List<BaseCollider>> triggers;
-        private List<BaseCollider> colliders;
+        private Dictionary<BaseCollider, List<BaseCollider>> _triggers;
+        private List<BaseCollider> _colliders;
         
-        private Queue<BaseCollider> addedColliderQueue;
-        private Queue<BaseCollider> removedColliderQueue;
+        private Queue<BaseCollider> _addedColliderQueue;
+        private Queue<BaseCollider> _removedColliderQueue;
 
         private void Awake()
         {
             Instance = this;
             
-            triggers = new Dictionary<BaseCollider, List<BaseCollider>>();
-            colliders = new List<BaseCollider>();
+            _triggers = new Dictionary<BaseCollider, List<BaseCollider>>();
+            _colliders = new List<BaseCollider>();
             
-            addedColliderQueue = new Queue<BaseCollider>();
-            removedColliderQueue = new Queue<BaseCollider>();
+            _addedColliderQueue = new Queue<BaseCollider>();
+            _removedColliderQueue = new Queue<BaseCollider>();
         }
 
         private void FixedUpdate()
@@ -44,9 +44,9 @@ namespace Controllers
 
         private void BaseColliderEnterTrigger()
         {
-            foreach (var trigger in triggers)
+            foreach (var trigger in _triggers)
             {
-                foreach (var baseCollider in colliders)
+                foreach (var baseCollider in _colliders)
                 {
                     if (baseCollider == null || trigger.Value.Contains(baseCollider))
                     {
@@ -78,7 +78,7 @@ namespace Controllers
 
         private void BaseColliderExitTrigger()
         {
-            foreach (var trigger in triggers)
+            foreach (var trigger in _triggers)
             {
                 for (var i= trigger.Value.Count - 1; i >= 0; i--)
                 {
@@ -130,56 +130,75 @@ namespace Controllers
         
         private void AddQueue()
         {
-            for(var _ = 0; _ < addedColliderQueue.Count; _++)
+            for(var _ = 0; _ < _addedColliderQueue.Count; _++)
             {
-                var addedCollider = addedColliderQueue.Dequeue();
+                var addedCollider = _addedColliderQueue.Dequeue();
                 
                 if (addedCollider.IsTrigger)
                 {
-                    triggers[addedCollider] = new List<BaseCollider>();
+                    _triggers[addedCollider] = new List<BaseCollider>();
                 }
                 else
                 {
-                    colliders.Add(addedCollider);
+                    _colliders.Add(addedCollider);
                 }
             }
         }
 
         private void RemoveQueue()
         {
-            for (var _ = 0; _ < removedColliderQueue.Count; _++)
+            for (var _ = 0; _ < _removedColliderQueue.Count; _++)
             {
-                var removedCollider = removedColliderQueue.Dequeue();
+                var removedCollider = _removedColliderQueue.Dequeue();
                 
                 if (removedCollider.IsTrigger)
                 {
-                    triggers.Remove(removedCollider);
+                    _triggers.Remove(removedCollider);
                 }
                 else
                 {
-                    colliders.Remove(removedCollider);
+                    _colliders.Remove(removedCollider);
                 }
             }
         }
         
         public void AddCollider(BaseCollider baseCollider)
         {
-            if (addedColliderQueue.Contains(baseCollider))
+            if (_addedColliderQueue.Contains(baseCollider))
             {
                 return;
             }
             
-            addedColliderQueue.Enqueue(baseCollider);
+            _addedColliderQueue.Enqueue(baseCollider);
         }
 
         public void RemoveCollider(BaseCollider baseCollider)
         {
-            if (removedColliderQueue.Contains(baseCollider))
+            if (_removedColliderQueue.Contains(baseCollider))
             {
                 return;
             }
             
-            removedColliderQueue.Enqueue(baseCollider);
+            _removedColliderQueue.Enqueue(baseCollider);
+        }
+
+        public static void Explosion(Transform transform, float radiusExplosion)
+        {
+            var explosion = new GameObject("ExplosionPhysics", typeof(CircleCollider));
+            var circleCollider = explosion.GetComponent<CircleCollider>();
+            
+            explosion.transform.position = transform.position;
+
+            circleCollider.Radius = radiusExplosion;
+            circleCollider.IsTrigger = true;
+            
+            circleCollider.CollisionEnter += (info)=>
+            {
+                Debug.Log(info.Collider.gameObject.tag);
+                // add force for unit in trigger by direction center trigger to position unit
+            };
+
+            Destroy(explosion, 2f);
         }
     }
 }
