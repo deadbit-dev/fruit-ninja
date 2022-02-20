@@ -9,7 +9,12 @@ namespace Components.Physics
         [SerializeField] private float radius;
 
         public Vector2 Center => transform.position + (Vector3) offset;
-        public float Radius => radius;
+
+        public float Radius
+        {
+            get => radius;
+            set => radius = value;
+        }
         
 #if UNITY_EDITOR 
         private void OnDrawGizmosSelected()
