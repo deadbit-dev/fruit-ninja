@@ -5,7 +5,7 @@ namespace Utils
 {
     public static class Slicer
     {
-        public static void Slice(GameObject unit, Vector3 contact)
+        public static void SliceObject(GameObject unit, Vector3 contact)
         {
             var transformUnit = unit.transform;
             var transformParentUnit = transformUnit.parent;

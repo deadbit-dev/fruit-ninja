@@ -115,8 +115,11 @@ namespace Utils
             return (spriteA, spriteB);
         }
 
-        public static Vector2 SliceDirectionByContact(Sprite sprite, Vector2 contactUV) => (contactUV - SpritePivotUV(sprite)).normalized;
-        
+        public static Vector2 SliceDirectionByContact(Sprite sprite, Vector2 contactUV)
+        {
+            return (contactUV - SpritePivotUV(sprite)).normalized;
+        }
+
         public static Vector2 SpritePivotUV(Sprite sprite)
         {
             return (new Vector2(sprite.rect.x, sprite.rect.y) + sprite.pivot) / sprite.rect.max;
