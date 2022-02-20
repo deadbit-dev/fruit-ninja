@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Components;
+using Controllers.Game;
 using ScriptableObjects;
 using Random = UnityEngine.Random;
 
@@ -9,10 +11,24 @@ namespace Controllers
     public class SpawnController : MonoBehaviour
     {
         [SerializeField] private SpawnSettings settings;
+        [Space]
+        [SerializeField] private GameController gameController;
         [SerializeField] private GameField2D gameField2D;
-
-        private float _spawnStartTime;
         
+        private float _spawnStartTime;
+
+        private void OnEnable()
+        {
+            gameController.OnStart += StartSpawn;
+            gameController.OnEnd += StopSpawn;
+        }
+
+        private void OnDisable()
+        {
+            gameController.OnStart -= StartSpawn;
+            gameController.OnEnd -= StopSpawn;
+        }
+
         private IEnumerator SpawnPackWithInterval(float interval)
         {
             while (true)

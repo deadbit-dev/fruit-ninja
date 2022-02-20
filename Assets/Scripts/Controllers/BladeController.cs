@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Components;
+using Components.Physics;
+using Controllers.Game;
 using Interfaces.Physics;
 
 namespace Controllers
@@ -9,23 +11,56 @@ namespace Controllers
     public class BladeController : MonoBehaviour
     {
         [SerializeField] private InputController inputController;
+        [SerializeField] private GameController gameController;
         [SerializeField] private GameField2D gameField2D;
+        [Space]
         [SerializeField] private GameObject bladePrefab;
         [Space]
         [SerializeField] private float minSpeed;
 
         private GameObject _bladeObject;
-        private BaseCollider _bladeCollider;
+        private CircleCollider _bladeCollider;
         private Vector2 _previousPosition;
-        private Coroutine _bladeTrail;
 
         public event Action<GameObject, Vector3> OnBladeContact;
 
         private void Start()
         {
             _bladeObject = Instantiate(bladePrefab, gameField2D.transform);
-            _bladeCollider = _bladeObject.GetComponent<BaseCollider>();
+            _bladeCollider = _bladeObject.GetComponent<CircleCollider>();
             _bladeCollider.CollisionEnter += BladeCollisionEnter;
+        }
+
+        private void OnEnable()
+        {
+            gameController.OnStart += OnStart;
+            gameController.OnEnd += OnEnd;
+        }
+        
+        private void OnDisable()
+        {
+            gameController.OnStart -= OnStart;
+            gameController.OnEnd -= OnEnd;
+        }
+
+        private void OnStart()
+        {
+            inputController.StartTouch += TouchStart;
+            inputController.EndTouch += TouchEnd;
+
+            if (_bladeObject == null)
+            {
+                return;
+            }
+            
+            _bladeObject.SetActive(true);
+        }
+
+        private void OnEnd()
+        { 
+            inputController.StartTouch -= TouchStart;
+            inputController.EndTouch -= TouchEnd; 
+            
             _bladeObject.SetActive(false);
         }
 
@@ -39,25 +74,13 @@ namespace Controllers
             OnBladeContact?.Invoke(info.Collider.gameObject, info.ContactPosition);
         }
 
-        private void OnEnable()
-        {
-            inputController.StartTouch += TouchStart;
-            inputController.EndTouch += TouchEnd;
-        }
-        
-        private void OnDisable()
-        {
-            inputController.StartTouch -= TouchStart;
-            inputController.EndTouch -= TouchEnd;
-        }
-
         private void TouchStart(Vector2 point)
         {
             _previousPosition = gameField2D.ScreenPointToGameField2D(point);
             _bladeObject.SetActive(true);
             _bladeCollider.enabled = false;
             
-            _bladeTrail = StartCoroutine(BladeTrail());
+            StartCoroutine(BladeTrail());
         }
 
         private IEnumerator BladeTrail()
@@ -92,8 +115,6 @@ namespace Controllers
         private void TouchEnd(Vector2 point)
         {
             _bladeObject.SetActive(false);
-            
-            StopCoroutine(_bladeTrail);
         }
     }
 }

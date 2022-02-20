@@ -6,7 +6,11 @@ namespace ScriptableObjects
     public class ScoreSettings : ScriptableObject
     {
         [SerializeField] private int scoreForSlicing;
+        [SerializeField] private float intervalForCombo;
+        [SerializeField] private int maxComboStage;
 
         public int ScoreForSlicing => scoreForSlicing;
+        public float IntervalForCombo => intervalForCombo;
+        public int MaxComboStage => maxComboStage;
     }
 }
