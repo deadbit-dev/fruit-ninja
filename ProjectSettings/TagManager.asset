@@ -5,9 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Part
-  - Fruit
   - Bomb
   - Heart
+  - Apple
+  - Cherry
+  - Limon
+  - Pear
+  - Strawberry
+  - Watermelon
   layers:
   - Default
   - TransparentFX
@@ -50,4 +55,7 @@ TagManager:
     locked: 0
   - name: Fruits
     uniqueID: 4003768733
+    locked: 0
+  - name: Bombs
+    uniqueID: 1830401713
     locked: 0
