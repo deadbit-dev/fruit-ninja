@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ScoreSettings
   m_EditorClassIdentifier: 
   scoreForSlicing: 10
+  intervalForCombo: 1
+  maxComboStage: 3
